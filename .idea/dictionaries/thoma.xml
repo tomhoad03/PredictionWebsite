@@ -2,6 +2,7 @@
   <dictionary name="thoma">
     <words>
       <w>flagicon</w>
+      <w>globalstyle</w>
       <w>leaderboard</w>
       <w>navbar</w>
       <w>querystring</w>
