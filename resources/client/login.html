@@ -31,28 +31,33 @@
         </div>
 
         <!-- Creates a navbar that spans the length of the webpage. -->
-        <nav class="navbar navbar-expand" style="background-color: #ff2800">
+        <nav class="navbar navbar-expand">
+
             <!-- Shows how the navbar displays and the style of the elements inside. -->
-            <div class="collapse navbar-collapse navbar-dark">
-                <ul class="navbar-nav">
+            <div class="container-fluid navbar-dark">
+
+                <ul class="nav navbar-nav">
+
                     <!-- Creates a navbar item that sends the user to the homepage. -->
-                    <li class="nav-item text-white">
-                        <a class="nav-link ml-4" href="/client/homepage.html">Home</a>
-                    <li>
+                    <li><a class="nav-link ml-4" href="/client/homepage.html">Home</a><li>
+
                     <!-- Creates a navbar item that sends the user to the predictions page. -->
-                    <li class="nav-item">
-                        <a class="nav-link ml-2" href="/client/predictions.html">Predictions</a>
-                    </li>
+                    <li><a class="nav-link ml-2" href="/client/predictions.html">Predictions</a></li>
+
                     <!-- Creates a navbar item that sends the user to the leaderboard. -->
-                    <li class="nav-item">
-                        <a class="nav-link ml-2" href="/client/leaderboard.html">Leaderboard</a>
-                    </li>
-                    <!-- Creates a navbar item that sends the user to login. -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="/client/login.html">Login</a>
-                    </li>
+                    <li><a class="nav-link ml-2" href="/client/leaderboard.html">Leaderboard</a></li>
+
                 </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+
+                    <!-- Creates a navbar item that sends the user to login. -->
+                    <li><a class="nav-link mr-4" href="/client/login.html">Login</a></li>
+
+                </ul>
+
             </div>
+
         </nav>
 
     </body>
