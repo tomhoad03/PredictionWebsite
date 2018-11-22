@@ -1,6 +1,28 @@
+/* Styles the title on every page to the same. */
 h1 {
-    color:#ff2800;
+    color: #ff2800;
 }
+
+/* Styles the navbar on every page to the same. */
 nav {
-    background-color:#ff2800;
+    background-color: #ff2800;
+}
+
+/* Styles the forms when creating a user, logging in or changing a password to the same style. */
+#account {
+    background-color: whitesmoke;
+
+    border: 2px solid #ff2800;
+    border-radius: 8px;
+
+    width: 400px;
+    height: auto;
+    padding: 15px;
+
+    margin-top: 40px;
+    margin-outside: auto;
+}
+
+.form-control {
+    margin-bottom: 5px;
 }
