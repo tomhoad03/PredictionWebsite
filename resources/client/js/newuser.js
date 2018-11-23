@@ -2,3 +2,5 @@ function pageLoad() {
 
 }
 
+function createUser() {
+}

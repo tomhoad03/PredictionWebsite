@@ -36,17 +36,17 @@ public class ClientController {
     }
 
     @GET
-    @Path("{path}")
+    @Path("html/{path}")
     @Produces({"text/html"})
     public byte[] getIHTMLFile(@PathParam("path") String path) {
-        return getFile("client/" + path);
+        return getFile("client/html/" + path);
     }
 
     @GET
-    @Path("favicon.ico")
+    @Path("flagicon.ico")
     @Produces({"image/x-icon"})
-    public byte[] getFavicon() {
-        return getFile("client/favicon.ico");
+    public byte[] getFlagicon() {
+        return getFile("client/flagicon.ico");
     }
 
 
