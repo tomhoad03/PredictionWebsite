@@ -19,11 +19,9 @@
         <link href="/client/css/bootstrap.min.css" rel="stylesheet">
         <link href="/client/css/globalstyle.css" rel="stylesheet">
 
-        <script src="/client/js/newuser.js"></script>
-
     </head>
 
-    <body class="bg-white" onload="pageLoad()">
+    <body class="bg-white">
 
         <!-- Creates a title for the account creation page. -->
         <div class="container-fluid bg-light pb-2">
@@ -52,7 +50,7 @@
             </div>
         </nav>
 
-        <!-- Creates form element that appears on the centre of the page.
+        <!-- Creates a form element that appears on the centre of the page.
              The styling is done by the global CSS file. -->
         <form id="accountForms">
             <div class="form-group" >
@@ -68,15 +66,17 @@
                 <label>Email:</label>
                 <input class="form-control" type="email" placeholder="Email">
 
-                <!-- For the passwords, the password type used will hide the password as its entered. -->
+                <!-- The password type used will hide the password as its entered. -->
                 <label>Password:</label>
                 <input class="form-control" type="password" placeholder="Password">
 
                 <label>Confirm Password:</label>
                 <input class="form-control" type="password" placeholder="Confirm Password">
 
+
+                <!-- Provides a link for users to create an account. -->
                 <hr>
-                <button type="button" class="btn btn-block">Create Account</button>
+                <a class="btn btn-block" href="#">Create Account</a>
 
             </div>
         </form>

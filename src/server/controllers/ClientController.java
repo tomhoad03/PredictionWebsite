@@ -39,7 +39,7 @@ public class ClientController {
     @Path("html/{path}")
     @Produces({"text/html"})
     public byte[] getIHTMLFile(@PathParam("path") String path) {
-        return getFile("client/htl/" + path);
+        return getFile("client/html/" + path);
     }
 
     @GET
