@@ -19,15 +19,15 @@
         <link href="/client/css/bootstrap.min.css" rel="stylesheet">
         <link href="/client/css/globalstyle.css" rel="stylesheet">
 
-        <script src="/client/js/newuser.js"></script>
+        <script src="/client/js/login.js"></script>
 
     </head>
 
     <body class="bg-white" onload="pageLoad()">
 
-        <!-- Creates a title for the account creation page. -->
-        <div class="container-fluid bg-light pb-2">
-            <h1 class="text-left p-4">Create Account</h1>
+        <!-- Creates a title for the login page. -->
+        <div class="container-fluid bg-white pb-2">
+            <h1 class="text-left p-4">Login</h1>
         </div>
 
         <!-- Creates a navbar that spans the length of the webpage. -->
@@ -36,25 +36,25 @@
             <div class="container-fluid navbar-dark">
                 <ul class="nav navbar-nav">
                     <!-- Creates a navbar item that sends the user to the homepage. -->
-                    <li><a class="nav-link ml-4" href="/client/homepage.html">Home</a><li>
+                    <li><a class="nav-link ml-4" href="/client/html/homepage.html">Home</a><li>
 
                     <!-- Creates a navbar item that sends the user to the predictions page. -->
-                    <li><a class="nav-link ml-2" href="/client/predictions.html">Predictions</a></li>
+                    <li><a class="nav-link ml-2" href="/client/html/predictions.html">Predictions</a></li>
 
                     <!-- Creates a navbar item that sends the user to the leaderboard. -->
-                    <li><a class="nav-link ml-2" href="/client/leaderboard.html">Leaderboard</a></li>
+                    <li><a class="nav-link ml-2" href="/client/html/leaderboard.html">Leaderboard</a></li>
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Creates a navbar item that sends the user to login. -->
-                    <li><a class="nav-link mr-4" href="/client/login.html">Login</a></li>
+                    <li><a class="nav-link mr-4" href="/client/html/login.html">Login</a></li>
                 </ul>
             </div>
         </nav>
 
         <!-- Creates form element that appears on the centre of the page.
-             The styling is done by the global CSS file. -->
-        <form id="accountform">
+         The styling is done by the global CSS file. -->
+        <form id="accountForms">
             <div class="form-group" >
                 <h5>Enter your details in the form below:</h5>
                 <hr>
@@ -64,19 +64,17 @@
                 <label>Username:</label>
                 <input class="form-control" placeholder="Username">
 
-                <!-- This input box uses the email type for entering an email. -->
-                <label>Email:</label>
-                <input class="form-control" type="email" placeholder="Email">
 
-                <!-- For the passwords, the password type used will hide the password as its entered. -->
+                <!-- For the password the password type used will hide the password as its entered. -->
                 <label>Password:</label>
                 <input class="form-control" type="password" placeholder="Password">
 
-                <label>Confirm Password:</label>
-                <input class="form-control" type="password" placeholder="Confirm Password">
 
+                <button type="button" class="btn btn-danger btn-block">Login</button>
                 <hr>
-                <button type="button" class="btn btn-block">Create Account</button>
+
+                <h5>Not made an account? Create one here:</h5>
+                <button type="button" class="btn btn-danger btn-block" href="/client/html/homepage.html">Create Account</button>
 
             </div>
         </form>
