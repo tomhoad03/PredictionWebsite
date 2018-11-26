@@ -52,7 +52,7 @@
 
         <!-- Creates a form element that appears on the centre of the page.
          The styling is done by the global CSS file. -->
-        <form id="accountForms" action="/user/get" method="get">
+        <form id="accountForms" action="/user/login" method="post">
             <div class="form-group">
                 <h5>Enter your details in the form below:</h5>
                 <hr>
@@ -60,20 +60,20 @@
                 <!-- Provides a input boxes to enter details in.
                      The placeholder puts a message in preliminary. -->
                 <label>Username:</label>
-                <input name="loginUsername" class="form-control" placeholder="Username">
+                <input name="loginUsername" class="form-control" placeholder="Username"/>
 
 
                 <!-- The password type used will hide the password as its entered. -->
                 <label>Password:</label>
-                <input name="loginPassword" class="form-control" type="password" placeholder="Password">
+                <input name="loginPassword" class="form-control" type="password" placeholder="Password"/>
 
                 <a class="linktext" href="/client/html/newpassword.html">Forgotten Password?</a>
                 <p></p>
                 <button id="loginSubmit" class="btn btn-block">Login</button>
 
-                <!-- <hr>
+                <hr>
                 <h5>Don't have an account? Create one here:</h5>
-                <a class="btn btn-block" href="/client/html/newuser.html">Create Account</a> -->
+                <a class="btn btn-block" href="/client/html/newuser.html">Create Account</a>
 
             </div>
         </form>
