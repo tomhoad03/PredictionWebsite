@@ -11,7 +11,7 @@ nav {
 }
 
 /* Styles the forms when creating a user, logging in or changing a password to the same style. */
-#accountform {
+#accountForms {
     background-color: whitesmoke;
 
     border: 2px solid #ff2800;
@@ -21,7 +21,9 @@ nav {
     height: auto;
     padding: 15px;
 
-    margin: auto;
+    margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .btn {
@@ -31,5 +33,9 @@ nav {
 
 .form-control {
     margin-bottom: 8px;
+}
+
+.linktext {
+    font-style: italic;
 }
 
