@@ -16,9 +16,10 @@
         <script src="/client/js/js.cookie.min.js"></script>
         <script src="/client/js/querystring.js"></script>
 
+        <script src="/client/js/login.js"></script>
+
         <link href="/client/css/bootstrap.min.css" rel="stylesheet">
         <link href="/client/css/globalstyle.css" rel="stylesheet">
-
     </head>
 
     <body class="bg-white">
@@ -52,7 +53,7 @@
 
         <!-- Creates a form element that appears on the centre of the page.
          The styling is done by the global CSS file. -->
-        <form id="accountForms" action="/user/login" method="post">
+        <form id="loginForm" action="/user/login" method="post">
             <div class="form-group">
                 <h5>Enter your details in the form below:</h5>
                 <hr>
@@ -69,7 +70,7 @@
 
                 <a class="linktext" href="/client/html/newpassword.html">Forgotten Password?</a>
                 <p></p>
-                <button id="loginSubmit" class="btn btn-block">Login</button>
+                <button id="loginSubmit" class="btn btn-block" href="/client/html/homepage.html">Login</button>
 
                 <hr>
                 <h5>Don't have an account? Create one here:</h5>

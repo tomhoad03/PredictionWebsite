@@ -10,8 +10,8 @@ nav {
     margin-bottom: 40px;
 }
 
-/* Styles the forms when creating a user, logging in or changing a password to the same style. */
-#accountForms {
+/* Styles the forms when logging in a user. */
+#loginForm {
     background-color: whitesmoke;
 
     border: 2px solid #ff2800;
