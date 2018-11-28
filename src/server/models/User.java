@@ -9,14 +9,14 @@ public class User {
     private String username;
     private String email;
     private String password;
-    //private String sessionToken;
+    private String sessionToken;
 
-    public User(int userID, String username, String email, String password/*, String sessionToken*/) {
+    public User(int userID, String username, String email, String password, String sessionToken) {
         this.userID = userID;
         this.username = username;
         this.email = email;
         this.password = password;
-        //this.sessionToken = sessionToken;
+        this.sessionToken = sessionToken;
     }
 
     public int getUserID() {
@@ -51,13 +51,13 @@ public class User {
         this.password = password;
     }
 
-    /*public String getSessionToken() {
+    public String getSessionToken() {
         return sessionToken;
     }
 
     public void setSessionToken(String sessionToken) {
         this.sessionToken = sessionToken;
-    }*/
+    }
 
     public static ArrayList<User> users = new ArrayList<>();
 
@@ -78,6 +78,7 @@ public class User {
         j.put("username", getUsername());
         j.put("email", getEmail());
         j.put("password", getPassword());
+        j.put("sessionToken", getSessionToken());
 
         return j;
     }
