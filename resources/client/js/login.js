@@ -1,6 +1,6 @@
 function pageLoad() {
     resetLoginForm();
-    checkLogin();
+    //checkLogin();
 }
 
 // Runs the required API request by the client.
