@@ -10,43 +10,53 @@ import server.models.services.UserService;
 
 import java.util.UUID;
 
+//States the wider API path.
 @Path("user/")
 public class UserController {
 
-    //Defines the HTTP request as post.
+    // Defines the HTTP request.
     @POST
     @Path("login")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Produces(MediaType.TEXT_PLAIN)
 
-    //Inputs the parameters of the form and creates a session token if they match an existing user.
+    // Inputs the results of the input boxes and parameters and uses them to login the user.
     public String loginHandler(@FormParam("loginUsername") String loginUsername,
                                @FormParam("loginPassword") String loginPassword) {
 
+        // Selects all of the users that exist within the database.
         UserService.selectAllInto(User.users);
-        for (User a: User.users) {
-            if (a.getUsername().toLowerCase().equals(loginUsername.toLowerCase())) {
-                if (!a.getPassword().equals(loginPassword)) {
+
+        // This algorithm simply compares the entered parameters to every user within the database.
+        for (User u: User.users) {
+
+            // Checks if the username matches.
+            if (u.getUsername().toLowerCase().equals(loginUsername.toLowerCase())) {
+
+                // Checks if the password matches.
+                if (!u.getPassword().equals(loginPassword)) {
                     return "Error: Incorrect Password!";
                 }
 
-                String token = UUID.randomUUID().toString();
-                a.setSessionToken(token);
+                // Creates a session token, unique to the current user.
+                String sessionToken = UUID.randomUUID().toString();
+                u.setSessionToken(sessionToken);
 
-                String success = UserService.update(a);
+                String updateSuccess = UserService.update(u);
 
-                if (success.equals("OK")) {
-                    return token;
+                // If the server makes a successful change, it will return the session token.
+                if (updateSuccess.equals("OK")) {
+                    return sessionToken;
                 } else {
                     return "Error: Can't create a session token.";
                 }
             }
         }
-        return "Error: User does not yet exist!";
+        return "Error: The user does not yet exist!";
     }
 
     @GET
-    @Path("check")
+    @Path("validate")
     @Produces(MediaType.TEXT_PLAIN)
     public String checkLogin(@CookieParam("sessionToken") Cookie sessionCookie) {
 
@@ -62,13 +72,13 @@ public class UserController {
 
     public static String validateSessionCookie(Cookie sessionCookie) {
         if (sessionCookie != null) {
-            String token = sessionCookie.getValue();
+            String sessionToken = sessionCookie.getValue();
             String result = UserService.selectAllInto(User.users);
             if (result.equals("OK")) {
-                for (User a : User.users) {
-                    if (a.getSessionToken().equals(token)) {
+                for (User u: User.users) {
+                    if (u.getSessionToken().equals(sessionToken)) {
                         Logger.log("Valid session token received.");
-                        return a.getUsername();
+                        return u.getUsername();
                     }
                 }
             }
