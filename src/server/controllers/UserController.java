@@ -11,7 +11,7 @@ import server.models.services.UserService;
 import java.util.UUID;
 
 //States the wider API path.
-@Path("user/")
+@Path("/user/")
 public class UserController {
 
     // Defines the HTTP request.

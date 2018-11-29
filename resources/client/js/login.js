@@ -1,7 +1,3 @@
-function pageLoad() {
-    resetLoginForm();
-}
-
 // Runs the required API request by the client.
 function resetLoginForm() {
 
@@ -54,11 +50,15 @@ function checkLogin() {
                         window.location.href = '/client/html/login.html';
                     }
                 }
+
+                alert(username);
             }
         });
+
     } else {
         if (currentPage !== '/client/html/login.html') {
             window.location.href = '/client/html/login.html';
         }
+
     }
 }
