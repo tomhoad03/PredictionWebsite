@@ -58,6 +58,7 @@ public class UserController {
     @GET
     @Path("validate")
     @Produces(MediaType.TEXT_PLAIN)
+
     public String checkLogin(@CookieParam("sessionToken") Cookie sessionCookie) {
 
         String sessionUser = validateSessionCookie(sessionCookie);
@@ -85,5 +86,4 @@ public class UserController {
         }
         return null;
     }
-
 }

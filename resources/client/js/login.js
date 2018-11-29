@@ -1,12 +1,11 @@
 function pageLoad() {
     resetLoginForm();
-    //checkLogin();
 }
 
 // Runs the required API request by the client.
 function resetLoginForm() {
 
-    // Uses a cookie that will store the desired location, after logging in.
+    // Checks if a there is a destination that the user wants to go to after logging in.
     if (Cookies.get("destination") === undefined) {
         window.location.href = "/client/html/login.html";
     }
