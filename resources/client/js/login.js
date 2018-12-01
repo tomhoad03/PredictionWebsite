@@ -15,7 +15,7 @@ function resetLoginForm() {
 
         $.ajax({
 
-            // Defines the location and type of the API request.
+            // Defines the API at /user/login as the POST API request to be made.
             url: '/user/login',
             type: 'POST',
 
@@ -35,27 +35,38 @@ function resetLoginForm() {
     });
 }
 
+// The function that will check if the user has a session token needed for the page loaded.
 function checkLogin() {
 
+    // Stores the URL of the current page and gets the current session token.
     let currentPage = window.location.pathname;
     let token = Cookies.get("sessionToken");
 
+    // If the token is not undefined, a user is logged in, so the users details are returned.
     if (token !== undefined) {
+
         $.ajax({
+
+            // Defines the API at /user/validate as the GET API request to be made.
             url: '/user/validate',
             type: 'GET',
+
+            // If the API request is made, it'll check if a valid user exists.
             success: username => {
                 if (username === "") {
+
+                    // Forces the user to try to login again.
                     if (currentPage !== '/client/html/login.html') {
                         window.location.href = '/client/html/login.html';
                     }
                 }
-
-                alert(username);
             }
         });
 
+    // If the token is undefined, no user is logged in.
     } else {
+
+        // Sends the user to go and login if not already there.
         if (currentPage !== '/client/html/login.html') {
             window.location.href = '/client/html/login.html';
         }

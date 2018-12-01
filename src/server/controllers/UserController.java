@@ -14,7 +14,7 @@ import java.util.UUID;
 @Path("/user/")
 public class UserController {
 
-    // Defines the HTTP request.
+    // Defines the API request at /user/login.
     @POST
     @Path("login")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
@@ -35,7 +35,7 @@ public class UserController {
 
                 // Checks if the password matches.
                 if (!u.getPassword().equals(loginPassword)) {
-                    return "Error: Incorrect Password!";
+                    return "Error: Incorrect Password";
                 }
 
                 // Creates a session token, unique to the current user.
@@ -52,31 +52,47 @@ public class UserController {
                 }
             }
         }
-        return "Error: The user does not yet exist!";
+        return "Error: Incorrect Username";
     }
 
+    // Defines the API request at /user/validate.
     @GET
     @Path("validate")
     @Produces(MediaType.TEXT_PLAIN)
 
+    // Takes the existing session token stored in a cookie and returns the users credentials.
     public String checkLogin(@CookieParam("sessionToken") Cookie sessionCookie) {
 
+        // Sets the session users details if the session token is valid.
         String sessionUser = validateSessionCookie(sessionCookie);
 
+        // Returns the username of the user if one has a valid session token.
         if (sessionUser == null) {
-            Logger.log("Error: Invalid user session token");
+            Logger.log("Error: Invalid user session token.");
             return "";
         } else {
             return sessionUser;
         }
     }
 
+    // Checks if the session token in the session cookie is valid.
     public static String validateSessionCookie(Cookie sessionCookie) {
+
+        // If the session cookie stores a value, it proceeds, else it returns null.
         if (sessionCookie != null) {
+
+            // Gets the value stored within the cookie.
             String sessionToken = sessionCookie.getValue();
+
+            // Gets all of the users from the database.
             String result = UserService.selectAllInto(User.users);
+
             if (result.equals("OK")) {
+
+                // Checks the sessionToken against the sessionToken of every users stored token.
                 for (User u: User.users) {
+
+                    // If a user has that session token, the username is returned.
                     if (u.getSessionToken().equals(sessionToken)) {
                         Logger.log("Valid session token received.");
                         return u.getUsername();
