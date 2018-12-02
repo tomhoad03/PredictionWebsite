@@ -104,24 +104,31 @@ public class UserController {
         return null;
     }
 
+    // Defines the API request at /user/new.
     @POST
     @Path("new")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Produces(MediaType.TEXT_PLAIN)
 
+    // Inputs that values from the form and creates a new user if validated.
     public String createUser(@FormParam("newUsername") String newUsername,
                              @FormParam("newEmail") String newEmail,
                              @FormParam("newPassword") String newPassword,
                              @FormParam("confirmPassword") String confirmPassword) {
 
+        // Checks if the form has been completely filled out.
         if (newUsername.equals("") || newEmail.equals("") || newPassword.equals("") || confirmPassword.equals("")){
             return "Error: Missing credentials.";
+
+        // Checks if the password and confirm password match up.
         } else if (!newPassword.toLowerCase().equals(confirmPassword.toLowerCase())) {
             return "Error: The passwords don't match.";
         }
 
+        // Inputs all the values from the database table.
         UserService.selectAllInto((User.users));
 
+        // Comparing against every user, it checks if a username, email or password is taken.
         for (User u: User.users) {
             if (u.getUsername().toLowerCase().equals(newUsername.toLowerCase())) {
                 return "Error: An existing user already has this username.";
@@ -132,8 +139,8 @@ public class UserController {
             }
         }
 
-        User newUser = new User(User.nextId(), newUsername, newEmail, newPassword, null);
-        return UserService.insert(newUser);
+        // Instantiates a new user as an object and adds it to the database.
+        return UserService.insert(new User(User.nextId(), newUsername, newEmail, newPassword, null));
     }
 
 }
