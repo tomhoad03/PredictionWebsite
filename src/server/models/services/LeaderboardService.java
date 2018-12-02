@@ -22,8 +22,6 @@ public class LeaderboardService {
                 if (results != null) {
                     while (results.next()) {
                         targetList.add(new Leaderboard(results.getInt("UserID"), results.getInt("TotalPoints"), results.getInt("Position")));
-
-
                     }
                 }
             }
@@ -47,8 +45,6 @@ public class LeaderboardService {
                 ResultSet results = statement.executeQuery();
                 if (results != null && results.next()) {
                     result = new Leaderboard(results.getInt("UserID"), results.getInt("TotalPoints"), results.getInt("Position"));
-
-
                 }
             }
         } catch (SQLException resultsException) {
@@ -68,12 +64,6 @@ public class LeaderboardService {
             statement.setInt(2, itemToSave.getTotalPoints());
             statement.setInt(3, itemToSave.getPosition());
 
-
-
-
-
-
-
             statement.executeUpdate();
             return "OK";
         } catch (SQLException resultsException) {
@@ -91,14 +81,8 @@ public class LeaderboardService {
             );
             statement.setInt(1, itemToSave.getTotalPoints());
             statement.setInt(2, itemToSave.getPosition());
-
-
-
-
-
-
-
             statement.setInt(3, itemToSave.getUserID());
+
             statement.executeUpdate();
             return "OK";
         } catch (SQLException resultsException) {

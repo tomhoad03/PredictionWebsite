@@ -22,8 +22,6 @@ public class PredictionService {
                 if (results != null) {
                     while (results.next()) {
                         targetList.add(new Prediction(results.getInt("PredictionID"), results.getInt("UserID"), results.getInt("QuestionNum"), results.getInt("ChoiceID")));
-
-
                     }
                 }
             }
@@ -47,8 +45,6 @@ public class PredictionService {
                 ResultSet results = statement.executeQuery();
                 if (results != null && results.next()) {
                     result = new Prediction(results.getInt("PredictionID"), results.getInt("UserID"), results.getInt("QuestionNum"), results.getInt("ChoiceID"));
-
-
                 }
             }
         } catch (SQLException resultsException) {
@@ -69,11 +65,6 @@ public class PredictionService {
             statement.setInt(3, itemToSave.getQuestionNum());
             statement.setInt(4, itemToSave.getChoiceID());
 
-
-
-
-
-
             statement.executeUpdate();
             return "OK";
         } catch (SQLException resultsException) {
@@ -92,13 +83,8 @@ public class PredictionService {
             statement.setInt(1, itemToSave.getUserID());
             statement.setInt(2, itemToSave.getQuestionNum());
             statement.setInt(3, itemToSave.getChoiceID());
-
-
-
-
-
-
             statement.setInt(4, itemToSave.getPredictionID());
+
             statement.executeUpdate();
             return "OK";
         } catch (SQLException resultsException) {

@@ -22,8 +22,6 @@ public class UserService {
                 if (results != null) {
                     while (results.next()) {
                         targetList.add(new User(results.getInt("UserID"), results.getString("Username"), results.getString("Email"), results.getString("Password"), results.getString("SessionToken")));
-
-
                     }
                 }
             }
@@ -47,8 +45,6 @@ public class UserService {
                 ResultSet results = statement.executeQuery();
                 if (results != null && results.next()) {
                     result = new User(results.getInt("UserID"), results.getString("Username"), results.getString("Email"), results.getString("Password"), results.getString("SessionToken"));
-
-
                 }
             }
         } catch (SQLException resultsException) {
@@ -70,10 +66,6 @@ public class UserService {
             statement.setString(4, itemToSave.getPassword());
             statement.setString(5, itemToSave.getSessionToken());
 
-
-
-
-
             statement.executeUpdate();
             return "OK";
         } catch (SQLException resultsException) {
@@ -93,12 +85,8 @@ public class UserService {
             statement.setString(2, itemToSave.getEmail());
             statement.setString(3, itemToSave.getPassword());
             statement.setString(4, itemToSave.getSessionToken());
-
-
-
-
-
             statement.setInt(5, itemToSave.getUserID());
+
             statement.executeUpdate();
             return "OK";
         } catch (SQLException resultsException) {

@@ -22,8 +22,6 @@ public class ChoiceService {
                 if (results != null) {
                     while (results.next()) {
                         targetList.add(new Choice(results.getInt("ChoiceID"), results.getString("ChoiceName")));
-
-
                     }
                 }
             }
@@ -47,8 +45,6 @@ public class ChoiceService {
                 ResultSet results = statement.executeQuery();
                 if (results != null && results.next()) {
                     result = new Choice(results.getInt("ChoiceID"), results.getString("ChoiceName"));
-
-
                 }
             }
         } catch (SQLException resultsException) {
@@ -67,13 +63,6 @@ public class ChoiceService {
             statement.setInt(1, itemToSave.getChoiceID());
             statement.setString(2, itemToSave.getChoiceName());
 
-
-
-
-
-
-
-
             statement.executeUpdate();
             return "OK";
         } catch (SQLException resultsException) {
@@ -90,15 +79,8 @@ public class ChoiceService {
                     "UPDATE Choices SET ChoiceName = ? WHERE ChoiceID = ?"
             );
             statement.setString(1, itemToSave.getChoiceName());
-
-
-
-
-
-
-
-
             statement.setInt(2, itemToSave.getChoiceID());
+
             statement.executeUpdate();
             return "OK";
         } catch (SQLException resultsException) {
