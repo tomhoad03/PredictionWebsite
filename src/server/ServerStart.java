@@ -28,6 +28,7 @@ public class ServerStart {
             e.printStackTrace();
         } finally {
             server.destroy();
+            DatabaseConnection.close();
         }
     }
 }

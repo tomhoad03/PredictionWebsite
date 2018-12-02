@@ -13,10 +13,10 @@ function resetNewUserForm() {
 
             data: newuserForm.serialize(),
             success: response => {
-                if (response.startsWith('Error:')){
-                    alert(response);
-                } else {
+                if (response === 'OK') {
                     window.location.href = "/client/html/login.html";
+                } else {
+                    alert(response);
                 }
             }
         });
