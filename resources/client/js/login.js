@@ -1,4 +1,4 @@
-// Runs the required API request by the client.
+// Runs an API request by the client when the form is submitted.
 function resetLoginForm() {
 
     // Checks if a there is a destination that the user wants to go to after logging in.

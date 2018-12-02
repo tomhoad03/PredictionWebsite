@@ -16,12 +16,14 @@
         <script src="/client/js/js.cookie.min.js"></script>
         <script src="/client/js/querystring.js"></script>
 
+        <script src="/client/js/newuser.js"></script>
+
         <link href="/client/css/bootstrap.min.css" rel="stylesheet">
         <link href="/client/css/globalstyle.css" rel="stylesheet">
 
     </head>
 
-    <body class="bg-white">
+    <body class="bg-white" onload="resetNewUserForm()">
 
         <!-- Creates a title for the account creation page. -->
         <div class="container-fluid bg-light pb-2">
@@ -52,7 +54,7 @@
 
         <!-- Creates a form element that appears on the centre of the page.
              The styling is done by the global CSS file. -->
-        <form id="accountForms">
+        <form id="newuserForm" action="/user/new" method="post">
             <div class="form-group" >
                 <h5>Enter your details in the form below:</h5>
                 <hr>
@@ -60,23 +62,23 @@
                 <!-- Provides a input boxes to enter details in.
                      The placeholder puts a message in preliminary. -->
                 <label>Username:</label>
-                <input class="form-control" placeholder="Username">
+                <input name="newUsername" class="form-control" placeholder="Username">
 
                 <!-- This input box uses the email type for entering an email. -->
                 <label>Email:</label>
-                <input class="form-control" type="email" placeholder="Email">
+                <input name="newEmail" class="form-control" type="email" placeholder="Email">
 
                 <!-- The password type used will hide the password as its entered. -->
                 <label>Password:</label>
-                <input class="form-control" type="password" placeholder="Password">
+                <input name="newPassword" class="form-control" type="password" placeholder="Password">
 
                 <label>Confirm Password:</label>
-                <input class="form-control" type="password" placeholder="Confirm Password">
+                <input name="confirmPassword" class="form-control" type="password" placeholder="Confirm Password">
 
 
                 <!-- Provides a link for users to create an account. -->
                 <hr>
-                <a class="btn btn-block" href="#">Create Account</a>
+                <button class="btn btn-block" type="submit">Create Account</button>
 
             </div>
         </form>

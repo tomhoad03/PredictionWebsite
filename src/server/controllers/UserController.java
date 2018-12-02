@@ -102,4 +102,37 @@ public class UserController {
         }
         return null;
     }
+
+    @POST
+    @Path("new")
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    @Produces(MediaType.TEXT_PLAIN)
+
+    public String userCreator(@FormParam("newUsername") String newUsername,
+                              @FormParam("newEmail") String newEmail,
+                              @FormParam("newPassword") String newPassword,
+                              @FormParam("confirmPassword") String confirmPassword) {
+
+        UserService.selectAllInto((User.users));
+
+        for (User u: User.users) {
+            if (u.getUsername().toLowerCase().equals(newPassword.toLowerCase())) {
+                return "Error: An existing user already has this username.";
+            } else if (u.getEmail().toLowerCase().equals(newEmail.toLowerCase())) {
+                return "Error: An existing user already has this email address.";
+            } else if (u.getPassword().toLowerCase().equals(newPassword.toLowerCase())) {
+                return "Error: An existing user already has this password.";
+            }
+        }
+
+        if (!newPassword.toLowerCase().equals(confirmPassword.toLowerCase())) {
+            return "Error: The passwords don't match.";
+        } else{
+            int newID = User.nextId();
+
+            User newUser = new User(newID, newUsername, newEmail, newPassword, "");
+            return UserService.insert(newUser);
+        }
+    }
+
 }
