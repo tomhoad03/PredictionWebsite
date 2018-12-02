@@ -11,7 +11,7 @@ nav {
 }
 
 /* Styles the forms when logging in a user. */
-#loginForm {
+.form-group {
     background-color: whitesmoke;
 
     border: 2px solid #ff2800;
