@@ -78,7 +78,7 @@ public class UserController {
     }
 
     // Checks if the session token in the session cookie is valid.
-    public static String validateSessionCookie(Cookie sessionCookie) {
+    private static String validateSessionCookie(Cookie sessionCookie) {
 
         // If the session cookie stores a value, it proceeds, else it returns null.
         if (sessionCookie != null) {
@@ -111,7 +111,7 @@ public class UserController {
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Produces(MediaType.TEXT_PLAIN)
 
-    // Inputs that values from the form and creates a new user if validated.
+    // Inputs the values from the form and creates a new user if validated.
     public String create(@FormParam("newUsername") String newUsername,
                          @FormParam("newEmail") String newEmail,
                          @FormParam("newPassword") String newPassword,
@@ -149,6 +149,7 @@ public class UserController {
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Produces(MediaType.TEXT_PLAIN)
 
+    // Inputs the values from the form and changes the users password.
     public String edit(@FormParam("checkUsername") String checkUsername,
                        @FormParam("checkEmail") String checkEmail,
                        @FormParam("newPassword") String newPassword,
