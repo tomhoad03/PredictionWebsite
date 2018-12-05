@@ -1,12 +1,12 @@
 // Runs an API request by the client when the form is submitted.
-function resetNewUserForm() {
+function resetNewPasswordForm() {
 
     // Setups up the form as a collective object.
-    const newuserForm = $('#newuserForm');
+    const newpasswordForm = $('#newpasswordForm');
 
     // Runs when a submission has occurred and prevents multiple submissions.
-    newuserForm.unbind("submit")
-    newuserForm.submit(event => {
+    newpasswordForm.unbind("submit")
+    newpasswordForm.submit(event => {
 
         // Stops the form from automatically submitting the data entered.
         event.preventDefault();
@@ -14,11 +14,11 @@ function resetNewUserForm() {
         $.ajax({
 
             // Defines the API at /user/new as the POST API request to be made.
-            url: '/user/create',
+            url: '/user/edit',
             type: 'POST',
 
             // Gets the names of the input boxes from the form and sends them to the server.
-            data: newuserForm.serialize(),
+            data: newpasswordForm.serialize(),
             success: response => {
                 if (response === 'OK') {
 
