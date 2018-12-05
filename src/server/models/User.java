@@ -8,14 +8,16 @@ public class User {
     private int userID;
     private String username;
     private String email;
-    private String password;
+    private String hashedPassword;
+    private String salt;
     private String sessionToken;
 
-    public User(int userID, String username, String email, String password, String sessionToken) {
+    public User(int userID, String username, String email, String hashedPassword, String salt, String sessionToken) {
         this.userID = userID;
         this.username = username;
         this.email = email;
-        this.password = password;
+        this.hashedPassword = hashedPassword;
+        this.salt = salt;
         this.sessionToken = sessionToken;
     }
 
@@ -43,12 +45,20 @@ public class User {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public String getHashedPassword() {
+        return hashedPassword;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setHashedPassword(String hashedPassword) {
+        this.hashedPassword = hashedPassword;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
     }
 
     public String getSessionToken() {
@@ -77,11 +87,10 @@ public class User {
         j.put("userID", getUserID());
         j.put("username", getUsername());
         j.put("email", getEmail());
-        j.put("password", getPassword());
+        j.put("hashedPassword", getHashedPassword());
+        j.put("salt", getSalt());
         j.put("sessionToken", getSessionToken());
 
         return j;
     }
-
-
 }

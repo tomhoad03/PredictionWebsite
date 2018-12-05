@@ -4,12 +4,14 @@
       <w>accountform</w>
       <w>flagicon</w>
       <w>globalstyle</w>
+      <w>hasher</w>
       <w>leaderboard</w>
       <w>leaderboards</w>
       <w>linktext</w>
       <w>navbar</w>
       <w>newpassword</w>
       <w>newuser</w>
+      <w>nsae</w>
       <w>querystring</w>
       <w>webpage</w>
     </words>

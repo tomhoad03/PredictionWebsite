@@ -15,13 +15,13 @@ public class UserService {
         targetList.clear();
         try {
             PreparedStatement statement = DatabaseConnection.newStatement(
-                    "SELECT UserID, Username, Email, Password, SessionToken FROM Users"
+                    "SELECT UserID, Username, Email, HashedPassword, Salt, SessionToken FROM Users"
             );
             if (statement != null) {
                 ResultSet results = statement.executeQuery();
                 if (results != null) {
                     while (results.next()) {
-                        targetList.add(new User(results.getInt("UserID"), results.getString("Username"), results.getString("Email"), results.getString("Password"), results.getString("SessionToken")));
+                        targetList.add(new User(results.getInt("UserID"), results.getString("Username"), results.getString("Email"), results.getString("HashedPassword"), results.getString("Salt"), results.getString("SessionToken")));
                     }
                 }
             }
@@ -38,13 +38,13 @@ public class UserService {
         User result = null;
         try {
             PreparedStatement statement = DatabaseConnection.newStatement(
-                    "SELECT UserID, Username, Email, Password, SessionToken FROM Users WHERE UserID = ?"
+                    "SELECT UserID, Username, Email, HashedPassword, Salt, SessionToken FROM Users WHERE UserID = ?"
             );
             if (statement != null) {
                 statement.setInt(1, id);
                 ResultSet results = statement.executeQuery();
                 if (results != null && results.next()) {
-                    result = new User(results.getInt("UserID"), results.getString("Username"), results.getString("Email"), results.getString("Password"), results.getString("SessionToken"));
+                    result = new User(results.getInt("UserID"), results.getString("Username"), results.getString("Email"), results.getString("HashedPassword"), results.getString("Salt"), results.getString("SessionToken"));
                 }
             }
         } catch (SQLException resultsException) {
@@ -58,13 +58,14 @@ public class UserService {
     public static String insert(User itemToSave) {
         try {
             PreparedStatement statement = DatabaseConnection.newStatement(
-                    "INSERT INTO Users (UserID, Username, Email, Password, SessionToken) VALUES (?, ?, ?, ?, ?)"
+                    "INSERT INTO Users (UserID, Username, Email, HashedPassword, Salt, SessionToken) VALUES (?, ?, ?, ?, ?, ?)"
             );
             statement.setInt(1, itemToSave.getUserID());
             statement.setString(2, itemToSave.getUsername());
             statement.setString(3, itemToSave.getEmail());
-            statement.setString(4, itemToSave.getPassword());
-            statement.setString(5, itemToSave.getSessionToken());
+            statement.setString(4, itemToSave.getHashedPassword());
+            statement.setString(5, itemToSave.getSalt());
+            statement.setString(6, itemToSave.getSessionToken());
 
             statement.executeUpdate();
             return "OK";
@@ -79,13 +80,14 @@ public class UserService {
     public static String update(User itemToSave) {
         try {
             PreparedStatement statement = DatabaseConnection.newStatement(
-                    "UPDATE Users SET Username = ?, Email = ?, Password = ?, SessionToken = ? WHERE UserID = ?"
+                    "UPDATE Users SET Username = ?, Email = ?, HashedPassword = ?, Salt = ?, SessionToken = ? WHERE UserID = ?"
             );
             statement.setString(1, itemToSave.getUsername());
             statement.setString(2, itemToSave.getEmail());
-            statement.setString(3, itemToSave.getPassword());
-            statement.setString(4, itemToSave.getSessionToken());
-            statement.setInt(5, itemToSave.getUserID());
+            statement.setString(3, itemToSave.getHashedPassword());
+            statement.setString(4, itemToSave.getSalt());
+            statement.setString(5, itemToSave.getSessionToken());
+            statement.setInt(6, itemToSave.getUserID());
 
             statement.executeUpdate();
             return "OK";

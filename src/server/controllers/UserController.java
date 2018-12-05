@@ -1,9 +1,12 @@
 package server.controllers;
 
-import javax.print.attribute.standard.Media;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Cookie;
 import javax.ws.rs.core.MediaType;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import javax.xml.bind.DatatypeConverter;
 
 import server.Logger;
 
@@ -36,7 +39,7 @@ public class UserController {
             if (u.getUsername().toLowerCase().equals(loginUsername.toLowerCase())) {
 
                 // Checks if the password matches to an existing user.
-                if (!u.getPassword().equals(loginPassword)) {
+                if (!u.getHashedPassword().equals(generateHash((loginPassword + u.getSalt())))) {
                     return "Error: Incorrect Password";
                 }
 
@@ -138,8 +141,26 @@ public class UserController {
             }
         }
 
+        // Generates the salt for the end of the password.
+        String salt = UUID.randomUUID().toString();
+
+        // Creates the hashed password by using the generateHash() algorithm.
+        String hashedPassword = generateHash(newPassword + salt);
+
         // Instantiates a new user as an object and adds it to the database.
-        return UserService.insert(new User(User.nextId(), newUsername, newEmail, newPassword, null));
+        return UserService.insert(new User(User.nextId(), newUsername, newEmail, hashedPassword, salt,null));
+    }
+
+    // Hashes the password with the salt using the SHA-256 algorithm.
+    private static String generateHash(String saltedPassword)
+    {
+        try {
+            MessageDigest hasher = MessageDigest.getInstance("SHA-256");
+            hasher.update(saltedPassword.getBytes());
+            return DatatypeConverter.printHexBinary(hasher.digest()).toUpperCase();
+        } catch (NoSuchAlgorithmException nsae) {
+            return nsae.getMessage();
+        }
     }
 
 
@@ -158,6 +179,7 @@ public class UserController {
         // Inputs all the values from the database table.
         UserService.selectAllInto((User.users));
 
+        // Searches through every user in the database to find a match.
         for (User u: User.users) {
 
             // Checks if the username matches to an existing user.
@@ -169,11 +191,14 @@ public class UserController {
                     // Checks if the password and confirm password match up.
                     if (newPassword.toLowerCase().equals(confirmPassword.toLowerCase())) {
 
+                        // Hashes the new password.
+                        String newHashedPassword = generateHash((newPassword + u.getSalt()));
+
                         // Checks if the new password matches the existing password.
-                        if (!newPassword.toLowerCase().equals(u.getPassword().toLowerCase())) {
+                        if (!newHashedPassword.equals(u.getHashedPassword())) {
 
                             // Sets the password to the new one.
-                            u.setPassword(newPassword);
+                            u.setHashedPassword(newHashedPassword);
 
                             // Returns the status of a change in the database.
                             String updateSuccess = UserService.update(u);
