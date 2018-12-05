@@ -19,6 +19,10 @@ nav {
     color: white;
 }
 
+#currentUser {
+    color: #ff2800;
+}
+
 /* Styles the forms when logging in a user. */
 .form-group {
     background-color: whitesmoke;

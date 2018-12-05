@@ -68,13 +68,12 @@ function checkLogin() {
             }
         });
 
-    // If the token is undefined, no user is logged in.
+        // If the token is undefined, no user is logged in.
     } else {
 
         // Sends the user to go and login if not already there.
         if (currentPage !== '/client/html/login.html') {
             window.location.href = '/client/html/login.html';
         }
-
     }
 }
