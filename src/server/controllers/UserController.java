@@ -111,10 +111,10 @@ public class UserController {
     @Produces(MediaType.TEXT_PLAIN)
 
     // Inputs that values from the form and creates a new user if validated.
-    public String new(@FormParam("newUsername") String newUsername,
-                      @FormParam("newEmail") String newEmail,
-                      @FormParam("newPassword") String newPassword,
-                      @FormParam("confirmPassword") String confirmPassword) {
+    public String newUser(@FormParam("newUsername") String newUsername,
+                          @FormParam("newEmail") String newEmail,
+                          @FormParam("newPassword") String newPassword,
+                          @FormParam("confirmPassword") String confirmPassword) {
 
         // Checks if the form has been completely filled out.
         if (newUsername.equals("") || newEmail.equals("") || newPassword.equals("") || confirmPassword.equals("")){
