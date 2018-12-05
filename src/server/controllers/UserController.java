@@ -1,5 +1,6 @@
 package server.controllers;
 
+import javax.print.attribute.standard.Media;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Cookie;
 import javax.ws.rs.core.MediaType;
@@ -31,10 +32,10 @@ public class UserController {
         // This algorithm simply compares the entered parameters to every user within the database.
         for (User u: User.users) {
 
-            // Checks if the username matches.
+            // Checks if the username matches to an existing user.
             if (u.getUsername().toLowerCase().equals(loginUsername.toLowerCase())) {
 
-                // Checks if the password matches.
+                // Checks if the password matches to an existing user.
                 if (!u.getPassword().equals(loginPassword)) {
                     return "Error: Incorrect Password";
                 }
@@ -104,9 +105,9 @@ public class UserController {
         return null;
     }
 
-    // Defines the API request at /user/new.
+    // Defines the API request at /user/create.
     @POST
-    @Path("new")
+    @Path("create")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Produces(MediaType.TEXT_PLAIN)
 
@@ -128,14 +129,12 @@ public class UserController {
         // Inputs all the values from the database table.
         UserService.selectAllInto((User.users));
 
-        // Comparing against every user, it checks if a username, email or password is taken.
+        // Comparing against every user, it checks if a username or email is taken.
         for (User u: User.users) {
             if (u.getUsername().toLowerCase().equals(newUsername.toLowerCase())) {
                 return "Error: An existing user already has this username.";
             } else if (u.getEmail().toLowerCase().equals(newEmail.toLowerCase())) {
                 return "Error: An existing user already has this email address.";
-            } else if (u.getPassword().toLowerCase().equals(newPassword.toLowerCase())) {
-                return "Error: An existing user already has this password.";
             }
         }
 
@@ -143,4 +142,57 @@ public class UserController {
         return UserService.insert(new User(User.nextId(), newUsername, newEmail, newPassword, null));
     }
 
+
+    // Defines the API request at /user/edit.
+    @POST
+    @Path("edit")
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    @Produces(MediaType.TEXT_PLAIN)
+
+    public String edit(@FormParam("checkUsername") String checkUsername,
+                       @FormParam("checkEmail") String checkEmail,
+                       @FormParam("newPassword") String newPassword,
+                       @FormParam("confirmPassword") String confirmPassword) {
+
+        // Inputs all the values from the database table.
+        UserService.selectAllInto((User.users));
+
+        for (User u: User.users) {
+
+            // Checks if the username matches to an existing user.
+            if (u.getUsername().toLowerCase().equals(checkUsername.toLowerCase())) {
+
+                // Checks if the email matches to an existing user.
+                if (u.getEmail().toLowerCase().equals(checkEmail.toLowerCase())) {
+
+                    // Checks if the password and confirm password match up.
+                    if (newPassword.toLowerCase().equals(confirmPassword.toLowerCase())) {
+
+                        // Checks if the new password matches the existing password.
+                        if (!newPassword.toLowerCase().equals(u.getPassword().toLowerCase())) {
+
+                            // Sets the password to the new one.
+                            u.setPassword(newPassword);
+
+                            // Returns the status of a change in the database.
+                            String updateSuccess = UserService.update(u);
+
+                            // Checks if the change has been successful.
+                            if (!updateSuccess.equals("OK")) {
+                                return "Error: Can't change the password.";
+                            }
+                        }
+
+                        return "Error: The passwords matches the existing password";
+                    }
+
+                    return "Error: The passwords don't match.";
+                }
+
+                return "Error: A user with this email address does not exist.";
+            }
+        }
+
+        return "Error: A user with this username does not exist.";
+    }
 }

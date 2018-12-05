@@ -13,7 +13,7 @@ function resetNewUserForm() {
 
         $.ajax({
 
-            // Defines the API at /user/new as the POST API request to be made.
+            // Defines the API at /user/create as the POST API request to be made.
             url: '/user/create',
             type: 'POST',
 
