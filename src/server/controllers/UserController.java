@@ -22,8 +22,8 @@ public class UserController {
     @Produces(MediaType.TEXT_PLAIN)
 
     // Inputs the results of the input boxes and parameters and uses them to login the user.
-    public String loginHandler(@FormParam("loginUsername") String loginUsername,
-                               @FormParam("loginPassword") String loginPassword) {
+    public String login(@FormParam("loginUsername") String loginUsername,
+                        @FormParam("loginPassword") String loginPassword) {
 
         // Selects all of the users that exist within the database.
         UserService.selectAllInto(User.users);
@@ -62,7 +62,7 @@ public class UserController {
     @Produces(MediaType.TEXT_PLAIN)
 
     // Takes the existing session token stored in a cookie and returns the users credentials.
-    public String checkLogin(@CookieParam("sessionToken") Cookie sessionCookie) {
+    public String validate(@CookieParam("sessionToken") Cookie sessionCookie) {
 
         // Sets the session users details if the session token is valid.
         String sessionUser = validateSessionCookie(sessionCookie);
@@ -111,10 +111,10 @@ public class UserController {
     @Produces(MediaType.TEXT_PLAIN)
 
     // Inputs that values from the form and creates a new user if validated.
-    public String createUser(@FormParam("newUsername") String newUsername,
-                             @FormParam("newEmail") String newEmail,
-                             @FormParam("newPassword") String newPassword,
-                             @FormParam("confirmPassword") String confirmPassword) {
+    public String new(@FormParam("newUsername") String newUsername,
+                      @FormParam("newEmail") String newEmail,
+                      @FormParam("newPassword") String newPassword,
+                      @FormParam("confirmPassword") String confirmPassword) {
 
         // Checks if the form has been completely filled out.
         if (newUsername.equals("") || newEmail.equals("") || newPassword.equals("") || confirmPassword.equals("")){
