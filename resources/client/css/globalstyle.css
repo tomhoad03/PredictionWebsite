@@ -10,6 +10,15 @@ nav {
     margin-bottom: 40px;
 }
 
+.linktext {
+    font-style: italic;
+}
+
+.btn {
+    background-color: #ff2800;
+    color: white;
+}
+
 /* Styles the forms when logging in a user. */
 .form-group {
     background-color: whitesmoke;
@@ -26,16 +35,6 @@ nav {
     margin-right: auto;
 }
 
-.btn {
-    background-color: #ff2800;
-    color: white;
-}
-
 .form-control {
     margin-bottom: 8px;
 }
-
-.linktext {
-    font-style: italic;
-}
-
