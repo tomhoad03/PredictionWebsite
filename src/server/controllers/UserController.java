@@ -204,17 +204,19 @@ public class UserController {
                             // Checks if the change has been successful.
                             if (!updateSuccess.equals("OK")) {
                                 return "Error: Can't change the password.";
+                            } else {
+                                return updateSuccess;
                             }
                         }
-
-                        return "Error: The password matches the existing password.";
                     }
 
-                    return "Error: The passwords don't match.";
+                    return "Error: The password matches the existing password.";
                 }
 
-                return "Error: A user with this email address does not exist.";
+                return "Error: The passwords don't match.";
             }
+
+            return "Error: A user with this email address does not exist.";
         }
 
         return "Error: A user with this username does not exist.";

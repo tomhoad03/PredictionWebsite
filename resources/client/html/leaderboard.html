@@ -16,16 +16,26 @@
         <script src="/client/js/js.cookie.min.js"></script>
         <script src="/client/js/querystring.js"></script>
 
+        <script src="/client/js/leaderboard.js"></script>
+        <script src="/client/js/login.js"></script>
+
         <link href="/client/css/bootstrap.min.css" rel="stylesheet">
         <link href="/client/css/globalstyle.css" rel="stylesheet">
 
     </head>
 
-    <body class="bg-white">
+    <body class="bg-white" onload="pageLoad()">
 
         <!-- Creates a title for the leaderboard page. -->
         <div class="container-fluid bg-light pb-2">
-            <h1 class="text-left p-4">Leaderboard</h1>
+            <div class="row">
+                <div class="col">
+                    <h1 class="text-left p-4">Leaderboard</h1>
+                </div>
+                <div class="col">
+                    <h5 class="text-right p-4"></h5>
+                </div>
+            </div>
         </div>
 
         <!-- Creates a navbar that spans the length of the webpage. -->
