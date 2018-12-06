@@ -220,20 +220,4 @@ public class UserController {
         return "Error: A user with this username does not exist.";
     }
 
-    @GET
-    @Path("get")
-    @Produces(MediaType.TEXT_PLAIN)
-
-    public String get(@CookieParam("sessionToken") Cookie sessionCookie) {
-
-        UserService.selectAllInto(User.users);
-
-        for (User u: User.users) {
-            if (u.getSessionToken().equals(sessionCookie.toString())) {
-                return u.getUsername();
-            }
-        }
-
-        return "";
-    }
 }

@@ -64,6 +64,9 @@ function checkLogin() {
                     if (currentPage !== '/client/html/login.html') {
                         window.location.href = '/client/html/login.html';
                     }
+                } else {
+                    // Returns the username and stores it in a cookie.
+                    Cookies.set("username", username);
                 }
             }
         });
