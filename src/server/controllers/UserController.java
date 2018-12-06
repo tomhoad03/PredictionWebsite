@@ -152,8 +152,7 @@ public class UserController {
     }
 
     // Hashes the password with the added salt.
-    private static String generateHash(String saltedPassword)
-    {
+    private static String generateHash(String saltedPassword) {
         int total = 0;
         
         for (int i = 0; i < saltedPassword.length(), i++) {
@@ -209,7 +208,7 @@ public class UserController {
                             }
                         }
 
-                        return "Error: The passwords matches the existing password";
+                        return "Error: The password matches the existing password.";
                     }
 
                     return "Error: The passwords don't match.";
