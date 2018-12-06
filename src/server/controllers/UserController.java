@@ -148,19 +148,19 @@ public class UserController {
         String hashedPassword = generateHash(newPassword + salt);
 
         // Instantiates a new user as an object and adds it to the database.
-        return UserService.insert(new User(User.nextId(), newUsername, newEmail, hashedPassword, salt,null));
+        return UserService.insert(new User(User.nextId(), newUsername, newEmail, hashedPassword, salt, null));
     }
 
-    // Hashes the password with the salt using the SHA-256 algorithm.
+    // Hashes the password with the added salt.
     private static String generateHash(String saltedPassword)
     {
-        try {
-            MessageDigest hasher = MessageDigest.getInstance("SHA-256");
-            hasher.update(saltedPassword.getBytes());
-            return DatatypeConverter.printHexBinary(hasher.digest()).toUpperCase();
-        } catch (NoSuchAlgorithmException nsae) {
-            return nsae.getMessage();
+        int total = 0;
+        
+        for (int i = 0; i < saltedPassword.length(), i++) {
+            total += saltedPassword.charAt(i);
         }
+        
+        return total MOD 256;
     }
 
 
