@@ -33,7 +33,7 @@ public class UserController {
         UserService.selectAllInto(User.users);
 
         // This algorithm simply compares the entered parameters to every user within the database.
-        for (User u: User.users) {
+        for (User u : User.users) {
 
             // Checks if the username matches to an existing user.
             if (u.getUsername().toLowerCase().equals(loginUsername.toLowerCase())) {
@@ -95,7 +95,7 @@ public class UserController {
             if (result.equals("OK")) {
 
                 // Checks the sessionToken against the sessionToken of every users stored token.
-                for (User u: User.users) {
+                for (User u : User.users) {
 
                     // If a user has that session token, the username is returned.
                     if (u.getSessionToken().equals(sessionToken)) {
@@ -121,10 +121,10 @@ public class UserController {
                          @FormParam("confirmPassword") String confirmPassword) {
 
         // Checks if the form has been completely filled out.
-        if (newUsername.equals("") || newEmail.equals("") || newPassword.equals("") || confirmPassword.equals("")){
+        if (newUsername.equals("") || newEmail.equals("") || newPassword.equals("") || confirmPassword.equals("")) {
             return "Error: Missing credentials.";
 
-        // Checks if the password and confirm password match up.
+            // Checks if the password and confirm password match up.
         } else if (!newPassword.toLowerCase().equals(confirmPassword.toLowerCase())) {
             return "Error: The passwords don't match.";
         }
@@ -133,7 +133,7 @@ public class UserController {
         UserService.selectAllInto((User.users));
 
         // Comparing against every user, it checks if a username or email is taken.
-        for (User u: User.users) {
+        for (User u : User.users) {
             if (u.getUsername().toLowerCase().equals(newUsername.toLowerCase())) {
                 return "Error: An existing user already has this username.";
             } else if (u.getEmail().toLowerCase().equals(newEmail.toLowerCase())) {
@@ -152,16 +152,15 @@ public class UserController {
     }
 
     // Hashes the password with the added salt.
-    private static String generateHash(String saltedPassword) {
-        int total = 0;
-        
-        for (int i = 0; i < saltedPassword.length(), i++) {
-            total += saltedPassword.charAt(i);
+    private String generateHash(String saltedPassword) {
+        try {
+            MessageDigest hasher = MessageDigest.getInstance("SHA-256");
+            hasher.update(saltedPassword.getBytes());
+            return DatatypeConverter.printHexBinary(hasher.digest()).toUpperCase();
+        } catch (NoSuchAlgorithmException nsae) {
+            return nsae.getMessage();
         }
-        
-        return total MOD 256;
     }
-
 
     // Defines the API request at /user/edit.
     @POST
@@ -179,7 +178,7 @@ public class UserController {
         UserService.selectAllInto((User.users));
 
         // Searches through every user in the database to find a match.
-        for (User u: User.users) {
+        for (User u : User.users) {
 
             // Checks if the username matches to an existing user.
             if (u.getUsername().toLowerCase().equals(checkUsername.toLowerCase())) {
@@ -219,5 +218,22 @@ public class UserController {
         }
 
         return "Error: A user with this username does not exist.";
+    }
+
+    @GET
+    @Path("get")
+    @Produces(MediaType.TEXT_PLAIN)
+
+    public String get(@CookieParam("sessionToken") Cookie sessionCookie) {
+
+        UserService.selectAllInto(User.users);
+
+        for (User u: User.users) {
+            if (u.getSessionToken().equals(sessionCookie.toString())) {
+                return u.getUsername();
+            }
+        }
+
+        return "";
     }
 }

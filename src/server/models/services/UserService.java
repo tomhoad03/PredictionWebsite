@@ -41,7 +41,7 @@ public class UserService {
                     "SELECT UserID, Username, Email, HashedPassword, Salt, SessionToken FROM Users WHERE UserID = ?"
             );
             if (statement != null) {
-                statement.setInt(1, id);
+                statement.setInt(6, id);
                 ResultSet results = statement.executeQuery();
                 if (results != null && results.next()) {
                     result = new User(results.getInt("UserID"), results.getString("Username"), results.getString("Email"), results.getString("HashedPassword"), results.getString("Salt"), results.getString("SessionToken"));
