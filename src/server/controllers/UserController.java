@@ -194,7 +194,7 @@ public class UserController {
                         String newHashedPassword = generateHash((newPassword + u.getSalt()));
 
                         // Checks if the new password matches the existing password.
-                        if (!newHashedPassword.equals(u.getHashedPassword())) {
+                        if (u.getHashedPassword().equals(newHashedPassword)) {
 
                             // Sets the password to the new one.
                             u.setHashedPassword(newHashedPassword);
@@ -218,9 +218,9 @@ public class UserController {
 
                 return "Error: A user with this email address does not exist.";
             }
-
-            return "Error: A user with this username does not exist.";
         }
+
+        return "Error: A user with this username does not exist.";
     }
 
 }
