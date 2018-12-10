@@ -35,11 +35,6 @@ function resetLoginForm() {
     });
 }
 
-// Sends the user to create an account, to stop the button submitting the login form.
-function toNewUser() {
-    window.location.href="/client/html/newuser.html"
-}
-
 // The function that will check if the user has a session token needed for the page loaded.
 function checkLogin() {
 
