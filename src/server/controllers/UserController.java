@@ -51,6 +51,7 @@ public class UserController {
 
                 // If the server makes a successful change, it will return the session token.
                 if (updateSuccess.equals("OK")) {
+                    Logger.log(loginUsername + " has logged in with token " + sessionToken);
                     return sessionToken;
                 } else {
                     return "Error: Can't create a session token.";
