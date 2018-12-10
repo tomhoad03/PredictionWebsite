@@ -209,18 +209,18 @@ public class UserController {
                                 return updateSuccess;
                             }
                         }
+
+                        return "Error: The password matches the existing password.";
                     }
 
-                    return "Error: The password matches the existing password.";
+                    return "Error: The passwords don't match.";
                 }
 
-                return "Error: The passwords don't match.";
+                return "Error: A user with this email address does not exist.";
             }
 
-            return "Error: A user with this email address does not exist.";
+            return "Error: A user with this username does not exist.";
         }
-
-        return "Error: A user with this username does not exist.";
     }
 
 }
