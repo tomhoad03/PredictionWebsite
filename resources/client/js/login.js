@@ -35,6 +35,10 @@ function resetLoginForm() {
     });
 }
 
+function toNewUser() {
+    window.location.href = "/client/html/newuser.html";
+}
+
 // The function that will check if the user has a session token needed for the page loaded.
 function checkLogin() {
 
