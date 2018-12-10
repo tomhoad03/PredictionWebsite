@@ -175,52 +175,46 @@ public class UserController {
                        @FormParam("newPassword") String newPassword,
                        @FormParam("confirmPassword") String confirmPassword) {
 
+        // Checks if the password and confirm password match up.
+        if (newPassword.toLowerCase().equals(confirmPassword.toLowerCase())) {
+            return "Error: The passwords don't match.";
+        }
+
         // Inputs all the values from the database table.
         UserService.selectAllInto((User.users));
 
         // Searches through every user in the database to find a match.
         for (User u : User.users) {
 
-            // Checks if the username matches to an existing user.
-            if (u.getUsername().toLowerCase().equals(checkUsername.toLowerCase())) {
+            // Checks if the username or email matches to an existing user.
+            if ((u.getUsername().toLowerCase().equals(checkUsername.toLowerCase()))
+                    || u.getEmail().toLowerCase().equals(checkEmail.toLowerCase())) {
 
-                // Checks if the email matches to an existing user.
-                if (u.getEmail().toLowerCase().equals(checkEmail.toLowerCase())) {
+                // Hashes the new password.
+                String newHashedPassword = generateHash((newPassword + u.getSalt()));
 
-                    // Checks if the password and confirm password match up.
-                    if (newPassword.toLowerCase().equals(confirmPassword.toLowerCase())) {
+                // Checks if the new password matches the existing password.
+                if (u.getHashedPassword().equals(newHashedPassword)) {
 
-                        // Hashes the new password.
-                        String newHashedPassword = generateHash((newPassword + u.getSalt()));
+                    // Sets the password to the new one.
+                    u.setHashedPassword(newHashedPassword);
 
-                        // Checks if the new password matches the existing password.
-                        if (u.getHashedPassword().equals(newHashedPassword)) {
+                    // Returns the status of a change in the database.
+                    String updateSuccess = UserService.update(u);
 
-                            // Sets the password to the new one.
-                            u.setHashedPassword(newHashedPassword);
-
-                            // Returns the status of a change in the database.
-                            String updateSuccess = UserService.update(u);
-
-                            // Checks if the change has been successful.
-                            if (!updateSuccess.equals("OK")) {
-                                return "Error: Can't change the password.";
-                            } else {
-                                return updateSuccess;
-                            }
-                        }
-
-                        return "Error: The password matches the existing password.";
+                    // Checks if the change has been successful.
+                    if (!updateSuccess.equals("OK")) {
+                        return "Error: Can't change the password.";
+                    } else {
+                        return updateSuccess;
                     }
-
-                    return "Error: The passwords don't match.";
+                } else {
+                    return "Error: The password matches the existing password.";
                 }
-
-                return "Error: A user with this email address does not exist.";
             }
         }
 
-        return "Error: A user with this username does not exist.";
+        return "Error: A user with this username or email does not exist.";
     }
 
 }
