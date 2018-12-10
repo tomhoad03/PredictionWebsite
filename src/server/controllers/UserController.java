@@ -51,7 +51,6 @@ public class UserController {
 
                 // If the server makes a successful change, it will return the session token.
                 if (updateSuccess.equals("OK")) {
-                    Logger.log(loginUsername + " has logged in with token " + sessionToken);
                     return sessionToken;
                 } else {
                     return "Error: Can't create a session token.";
@@ -176,7 +175,7 @@ public class UserController {
                        @FormParam("confirmPassword") String confirmPassword) {
 
         // Checks if the password and confirm password match up.
-        if (newPassword.toLowerCase().equals(confirmPassword.toLowerCase())) {
+        if (!newPassword.toLowerCase().equals(confirmPassword.toLowerCase())) {
             return "Error: The passwords don't match.";
         }
 
@@ -191,10 +190,10 @@ public class UserController {
                     || u.getEmail().toLowerCase().equals(checkEmail.toLowerCase())) {
 
                 // Hashes the new password.
-                String newHashedPassword = generateHash((newPassword + u.getSalt()));
+                String newHashedPassword = generateHash(newPassword + u.getSalt());
 
                 // Checks if the new password matches the existing password.
-                if (u.getHashedPassword().equals(newHashedPassword)) {
+                if (!u.getHashedPassword().equals(newHashedPassword)) {
 
                     // Sets the password to the new one.
                     u.setHashedPassword(newHashedPassword);
