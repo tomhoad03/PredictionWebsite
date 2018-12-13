@@ -79,3 +79,7 @@ function checkLogin() {
         }
     }
 }
+
+function logout() {
+    Cookies.set("sessionToken", null);
+}
