@@ -5,6 +5,7 @@ function pageLoad() {
     Cookies.set("destination", currentPage);
 
     checkLogin(currentPage);
+    setActive();Z
 }
 
 // The function that will check if the user has a session token needed for the page loaded.
