@@ -91,7 +91,7 @@ function setActive() {
 
             // Sets the state of every item in the card to inactive.
             for (let j = 0; j < selectedItems.length; j++) {
-                selectedItems[j].className = selectedItems[j].className.replace(" active", "");
+                selectedItems[j + (20 * itemsCard)].className = selectedItems[j + (20 * itemsCard)].className.replace(" active", "");
             }
 
             // Sets the state of the item that was clicked on to active.
