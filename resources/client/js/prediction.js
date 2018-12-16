@@ -51,3 +51,22 @@ function checkLogin(currentPage) {
 function logout() {
     Cookies.set("sessionToken", null);
 }
+
+function setActive() {
+    let dropdownItems = document.getElementsByClassName("dropdown-item");
+
+    for (let i = 0; i < dropdownItems.length; i++) {
+
+        dropdownItems[i].addEventListener("click", function() {
+            let selectedCard = document.getElementById("dropmenu" + Math.round(i/40));
+
+            let selectedItems = selectedCard.getElementsByClassName("dropdown-item");
+
+            for (let j = 0; j < selectedItems.length; j++) {
+                selectedItems[j].className = selectedItems[j].className.replace(" active", "");
+            }
+
+            this.className += " active";
+        })
+    }
+}
