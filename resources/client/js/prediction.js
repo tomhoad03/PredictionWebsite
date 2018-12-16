@@ -66,32 +66,31 @@ function setActive() {
             // Returns the card that the item was clicked in.
             let itemsCard = null;
 
-            switch (i) {
-                default:
-                    itemsCard = 0;
-                    break;
-                case 200 <= i <= 399:
-                    itemsCard = 1;
-                    break;
-                case 400 <= i <= 599:
-                    itemsCard = 2;
-                    break;
-                case 600 <= i <= 799:
-                    itemsCard = 3;
-                    break;
-                case 800 <= i <= 999:
-                    itemsCard = 4;
-                    break;
+            if (i >= 0 && i <= 20) {
+                itemsCard = 0;
+            }
+            else if (i >= 20 && i <= 40) {
+                itemsCard = 1;
+            }
+            else if (i >= 40 && i <= 60) {
+                itemsCard = 2;
+            }
+            else if (i >= 60 && i <= 80) {
+                itemsCard = 3;
+            }
+            else if (i >= 80 && i <= 100) {
+                itemsCard = 4;
             }
 
+            // Gets the card that the item exists in.
             let selectedCard = document.getElementById("dropmenu" + itemsCard);
 
             // Gets a list of all the drop-down items from that one card.
             let selectedItems = selectedCard.getElementsByClassName("dropdown-item");
 
-            // Sets the state of every item in the card to inactive.
             for (let j = 0; j < selectedItems.length; j++) {
-                selectedItems[j + (20 * itemsCard)].className = selectedItems[j + (20 * itemsCard)].className.replace(" active", "");
+                // Sets the state of every item in the card to inactive.
+                selectedItems[j].className = selectedItems[j].className.replace(" active", "");
             }
 
             // Sets the state of the item that was clicked on to active.
