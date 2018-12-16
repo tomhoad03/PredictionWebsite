@@ -5,7 +5,7 @@ function pageLoad() {
     Cookies.set("destination", currentPage);
 
     checkLogin(currentPage);
-    setActive();Z
+    setActive();
 }
 
 // The function that will check if the user has a session token needed for the page loaded.
@@ -52,20 +52,28 @@ function logout() {
     Cookies.set("sessionToken", null);
 }
 
+// Sets a drop-down items state to active, if it is selected.
 function setActive() {
+    // Gets a list of all the drop-down items on the webpage.
     let dropdownItems = document.getElementsByClassName("dropdown-item");
 
+    // Cycles through every item and adds an event listener to them.
     for (let i = 0; i < dropdownItems.length; i++) {
 
+        // The event listener runs the following function when clicked.
         dropdownItems[i].addEventListener("click", function() {
+            // Returns the card that the item was clicked in.
             let selectedCard = document.getElementById("dropmenu" + Math.round(i/40));
 
+            // Gets a list of all the drop-down items from that one card.
             let selectedItems = selectedCard.getElementsByClassName("dropdown-item");
 
+            // Sets the state of every item in the card to inactive.
             for (let j = 0; j < selectedItems.length; j++) {
                 selectedItems[j].className = selectedItems[j].className.replace(" active", "");
             }
 
+            // Sets the state of the item that was clicked on to active.
             this.className += " active";
         })
     }
