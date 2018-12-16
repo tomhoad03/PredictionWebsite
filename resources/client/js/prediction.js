@@ -62,8 +62,29 @@ function setActive() {
 
         // The event listener runs the following function when clicked.
         dropdownItems[i].addEventListener("click", function() {
+
             // Returns the card that the item was clicked in.
-            let selectedCard = document.getElementById("dropmenu" + Math.round(i/40));
+            let itemsCard = null;
+
+            switch (i) {
+                default:
+                    itemsCard = 0;
+                    break;
+                case 200 <= i <= 399:
+                    itemsCard = 1;
+                    break;
+                case 400 <= i <= 599:
+                    itemsCard = 2;
+                    break;
+                case 600 <= i <= 799:
+                    itemsCard = 3;
+                    break;
+                case 800 <= i <= 999:
+                    itemsCard = 4;
+                    break;
+            }
+
+            let selectedCard = document.getElementById("dropmenu" + itemsCard);
 
             // Gets a list of all the drop-down items from that one card.
             let selectedItems = selectedCard.getElementsByClassName("dropdown-item");
