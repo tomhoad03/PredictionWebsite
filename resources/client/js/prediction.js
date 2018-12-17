@@ -67,19 +67,19 @@ function setActive() {
             let itemsCard = null;
 
             if (i >= 0 && i <= 20) {
-                itemsCard = 0;
-            }
-            else if (i >= 20 && i <= 40) {
                 itemsCard = 1;
             }
-            else if (i >= 40 && i <= 60) {
+            else if (i >= 20 && i <= 40) {
                 itemsCard = 2;
             }
-            else if (i >= 60 && i <= 80) {
+            else if (i >= 40 && i <= 60) {
                 itemsCard = 3;
             }
-            else if (i >= 80 && i <= 100) {
+            else if (i >= 60 && i <= 80) {
                 itemsCard = 4;
+            }
+            else if (i >= 80 && i <= 100) {
+                itemsCard = 5;
             }
 
             // Gets the card that the item exists in.
