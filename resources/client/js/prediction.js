@@ -88,8 +88,8 @@ function setActive() {
             // Gets a list of all the drop-down items from that one card.
             let selectedItems = selectedCard.getElementsByClassName("dropdown-item");
 
+            // Sets the state of every item in the card to inactive.
             for (let j = 0; j < selectedItems.length; j++) {
-                // Sets the state of every item in the card to inactive.
                 selectedItems[j].className = selectedItems[j].className.replace(" active", "");
             }
 
