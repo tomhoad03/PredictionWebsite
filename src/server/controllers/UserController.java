@@ -130,7 +130,7 @@ public class UserController {
         }
 
         // Inputs all the values from the database table.
-        UserService.selectAllInto((User.users));
+        UserService.selectAllInto(User.users);
 
         // Comparing against every user, it checks if a username or email is taken.
         for (User u : User.users) {
