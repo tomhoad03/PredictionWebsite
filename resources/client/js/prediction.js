@@ -96,12 +96,8 @@ function setActive() {
             // Sets the state of the item that was clicked on to active.
             this.className += " active";
 
-            // Stores the choiceId and questionNum in a cookie.
-            Cookies.set("choiceID", selectedCard.getElementsByClassName("dropdown-item active"));
-            Cookies.set("questionNum", selectedCard);
-
             // Runs a function to make a prediction.
-            makePrediction();
+            makePrediction(selectedCard.getElementsByClassName("dropdown-item active"), selectedCard);
         })
     }
 }
@@ -114,7 +110,9 @@ function makePrediction(){
         type: 'POST',
 
         success: response => {
-
+            if (!response === "OK") {
+                   alert("Error: The prediction could not be made.");
+            }
         }
     });
 
