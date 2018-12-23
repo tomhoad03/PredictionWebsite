@@ -26,98 +26,106 @@
       <Position>2</Position>
       <DataType>STRING|0s</DataType>
     </column>
-    <key id="13" parent="6">
+    <column id="13" parent="6" name="CategoryID">
+      <Position>3</Position>
+      <DataType>INTEGER|0s</DataType>
+    </column>
+    <key id="14" parent="6">
       <ColNames>ChoiceID</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="14" parent="7" name="UserID">
+    <column id="15" parent="7" name="UserID">
       <Position>1</Position>
       <DataType>INTEGER|0s</DataType>
     </column>
-    <column id="15" parent="7" name="TotalPoints">
+    <column id="16" parent="7" name="TotalPoints">
       <Position>2</Position>
       <DataType>INTEGER|0s</DataType>
     </column>
-    <column id="16" parent="7" name="Position">
+    <column id="17" parent="7" name="Position">
       <Position>3</Position>
       <DataType>INTEGER|0s</DataType>
     </column>
-    <foreign-key id="17" parent="7">
+    <foreign-key id="18" parent="7">
       <ColNames>UserID</ColNames>
       <RefTableName>Users</RefTableName>
       <RefColNames>UserID</RefColNames>
     </foreign-key>
-    <column id="18" parent="8" name="PredictionID">
+    <column id="19" parent="8" name="PredictionID">
       <Position>1</Position>
       <DataType>INTEGER|0s</DataType>
     </column>
-    <column id="19" parent="8" name="UserID">
+    <column id="20" parent="8" name="UserID">
       <Position>2</Position>
       <DataType>INTEGER|0s</DataType>
     </column>
-    <column id="20" parent="8" name="QuestionNum">
+    <column id="21" parent="8" name="QuestionNum">
       <Position>3</Position>
       <DataType>INTEGER|0s</DataType>
     </column>
-    <column id="21" parent="8" name="ChoiceID">
+    <column id="22" parent="8" name="ChoiceID">
       <Position>4</Position>
       <DataType>INTEGER|0s</DataType>
     </column>
-    <key id="22" parent="8">
+    <key id="23" parent="8">
       <ColNames>PredictionID</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="23" parent="8">
+    <foreign-key id="24" parent="8">
       <ColNames>UserID</ColNames>
       <RefTableName>Users</RefTableName>
       <RefColNames>UserID</RefColNames>
     </foreign-key>
-    <foreign-key id="24" parent="8">
+    <foreign-key id="25" parent="8">
       <ColNames>ChoiceID</ColNames>
       <RefTableName>Choices</RefTableName>
       <RefColNames>ChoiceID</RefColNames>
     </foreign-key>
-    <column id="25" parent="9" name="UserID">
+    <column id="26" parent="9" name="UserID">
       <Position>1</Position>
       <DataType>INTEGER|0s</DataType>
     </column>
-    <column id="26" parent="9" name="Username">
+    <column id="27" parent="9" name="Username">
       <Position>2</Position>
       <DataType>STRING|0s</DataType>
     </column>
-    <column id="27" parent="9" name="Email">
+    <column id="28" parent="9" name="Email">
       <Position>3</Position>
       <DataType>STRING|0s</DataType>
     </column>
-    <column id="28" parent="9" name="Password">
+    <column id="29" parent="9" name="HashedPassword">
       <Position>4</Position>
       <DataType>STRING|0s</DataType>
     </column>
-    <column id="29" parent="9" name="SessionToken">
+    <column id="30" parent="9" name="Salt">
       <Position>5</Position>
       <DataType>STRING|0s</DataType>
     </column>
-    <key id="30" parent="9">
+    <column id="31" parent="9" name="SessionToken">
+      <Position>6</Position>
+      <DataType>STRING|0s</DataType>
+    </column>
+    <key id="32" parent="9">
       <ColNames>UserID</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="31" parent="10" name="type">
+    <column id="33" parent="10" name="type">
       <Position>1</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="32" parent="10" name="name">
+    <column id="34" parent="10" name="name">
       <Position>2</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="33" parent="10" name="tbl_name">
+    <column id="35" parent="10" name="tbl_name">
       <Position>3</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="34" parent="10" name="rootpage">
+    <column id="36" parent="10" name="rootpage">
       <Position>4</Position>
       <DataType>int|0s</DataType>
     </column>
-    <column id="35" parent="10" name="sql">
+    <column id="37" parent="10" name="sql">
       <Position>5</Position>
       <DataType>text|0s</DataType>
     </column>
