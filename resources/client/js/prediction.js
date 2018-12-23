@@ -110,8 +110,11 @@ function makePrediction(){
         type: 'POST',
 
         success: response => {
-            if (!response === "OK") {
-                   alert("Error: The prediction could not be made.");
+            if (response === "OK") {
+                alert("OK");
+            }
+            else {
+                alert("Error: The prediction could not be made.");
             }
         }
     });

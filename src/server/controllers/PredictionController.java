@@ -20,11 +20,10 @@ public class PredictionController {
     public String make(@CookieParam("sessionToken") String sessionToken,
                        int choiceId, int questionNum) {
 
-        int userId = getUserId(sessionToken);
+        //int userId = getUserId(sessionToken);
 
-        String predictionSuccess = PredictionService.insert(new Prediction(Prediction.nextId(), userId, questionNum, choiceId));
-        
-        return predictionSuccess;
+        return "";
+                //PredictionService.insert(new Prediction(Prediction.nextId(), userId, questionNum, choiceId));
     }
 
     private static int getUserId(String sessionToken) {
