@@ -107,7 +107,6 @@ function setActive() {
 }
 
 function makePrediction(){
-
     $.ajax({
 
         url: '/predict/make',
@@ -122,5 +121,4 @@ function makePrediction(){
             }
         }
     });
-
 }
