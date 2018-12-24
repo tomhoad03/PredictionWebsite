@@ -18,12 +18,12 @@ public class PredictionController {
     @Produces(MediaType.TEXT_PLAIN)
 
     public String make(@CookieParam("sessionToken") String sessionToken,
-                       int choiceId, int questionNum) {
+                       @CookieParam("choiceID") int choiceId,
+                       @CookieParam("questionNum") int questionNum) {
 
-        //int userId = getUserId(sessionToken);
+        int userId = getUserId(sessionToken);
 
-        return "";
-                //PredictionService.insert(new Prediction(Prediction.nextId(), userId, questionNum, choiceId));
+        return PredictionService.insert(new Prediction(Prediction.nextId(), userId, questionNum, choiceId));
     }
 
     private static int getUserId(String sessionToken) {
