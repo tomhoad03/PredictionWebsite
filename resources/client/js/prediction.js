@@ -96,8 +96,10 @@ function setActive() {
             // Sets the state of the item that was clicked on to active.
             this.className += " active";
 
+            let choiceID = selectedCard.getElementById(selectedCard + driver + j);
+
             // Sets the choice ID and question number as cookies.
-            Cookies.set("choiceId", selectedCard.getElementsByClassName("dropdown-item active"));
+            Cookies.set("choiceId",);
             Cookies.set("questionNum", selectedCard);
 
             // Runs a function to make a prediction.

@@ -24,11 +24,11 @@ public class PredictionController {
                        @CookieParam("choiceID") Cookie choiceId,
                        @CookieParam("questionNum") Cookie questionNum) {
 
-        Logger.log("Makes a prediction.");
-
         int userId = getUserId(sessionToken.getValue());
 
-        return PredictionService.insert(new Prediction(Prediction.nextId(), userId, questionNum.getValue(), choiceId.getValue()));
+        Logger.log("Makes a prediction.");
+
+        return PredictionService.insert(new Prediction(Prediction.nextId(), userId, Integer.parseInt(questionNum.getValue()), Integer.parseInt(choiceId.getValue())));
     }
 
     private static int getUserId(String sessionToken) {
