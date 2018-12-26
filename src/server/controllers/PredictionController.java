@@ -1,7 +1,5 @@
 package server.controllers;
 
-import server.Logger;
-
 import server.models.Prediction;
 import server.models.services.PredictionService;
 
@@ -33,8 +31,30 @@ public class PredictionController {
         int questionNum = Integer.parseInt(questionCookie.getValue());
         int choiceId = Integer.parseInt(choiceCookie.getValue());
 
-        // Makes a prediction in the database.
-        return PredictionService.insert(new Prediction(Prediction.nextId(), userId, questionNum, choiceId));
+        // Searches through every user in the database to find a matching user.
+        PredictionService.selectAllInto(Prediction.predictions);
+
+        for (Prediction p : Prediction.predictions) {
+
+            // Finds all the current predictions made by this user.
+            if (p.getUserID() == userId) {
+
+                // Deletes the existing prediction for the same question.
+                if (p.getQuestionNum() == questionNum) {
+                    PredictionService.deleteById(p.getPredictionID());
+                }
+
+                // Checks if a prediction under the same question with the same result, has been made.
+                if (p.getChoiceID() == choiceId) {
+                    return "This choice has already been selected.";
+                }
+
+                // Makes a prediction in the database.
+                return PredictionService.insert(new Prediction(Prediction.nextId(), userId, questionNum, choiceId));
+            }
+        }
+
+        return "Error: The prediction could not be made.";
     }
 
     // The private function to get the userId of the user from a session token.

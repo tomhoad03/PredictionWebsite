@@ -123,7 +123,7 @@ function makePrediction(){
                 alert("OK");
             }
             else {
-                alert("Error: The prediction could not be made.");
+                alert(response);
             }
         }
     });
