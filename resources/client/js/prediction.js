@@ -66,6 +66,7 @@ function setActive() {
             // Returns the card that the item was clicked in.
             let itemsCard = null;
 
+            // Returns the card that choice is made in.
             switch (i) {
                 case i >= 0 && i < 20:
                     itemsCard = 1;
