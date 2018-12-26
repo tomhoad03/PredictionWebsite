@@ -1,5 +1,7 @@
 package server.controllers;
 
+import server.Logger;
+
 import server.models.Prediction;
 import server.models.services.PredictionService;
 
@@ -19,12 +21,15 @@ public class PredictionController {
     @Produces(MediaType.TEXT_PLAIN)
 
     public String make(@CookieParam("sessionToken") Cookie sessionToken,
-                       @CookieParam("choiceID") Cookie choiceId,
-                       @CookieParam("questionNum") Cookie questionNum) {
+                       @CookieParam("choiceCookie") Cookie choiceCookie,
+                       @CookieParam("questionCookie") Cookie questionCookie) {
 
         int userId = getUserId(sessionToken.getValue());
 
-        return PredictionService.insert(new Prediction(Prediction.nextId(), userId, Integer.parseInt(questionNum.getValue()), Integer.parseInt(choiceId.getValue())));
+        int questionNum = Integer.parseInt(questionCookie.getValue());
+        int choiceId = Integer.parseInt(choiceCookie.getValue());
+
+        return PredictionService.insert(new Prediction(Prediction.nextId(), userId, questionNum, choiceId));
     }
 
     private static int getUserId(String sessionToken) {

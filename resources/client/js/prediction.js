@@ -66,19 +66,19 @@ function setActive() {
             // Returns the card that the item was clicked in.
             let itemsCard = null;
 
-            if (i >= 0 && i <= 20) {
+            if (i >= 0 && i < 20) {
                 itemsCard = 1;
             }
-            else if (i >= 20 && i <= 40) {
+            else if (i >= 20 && i < 40) {
                 itemsCard = 2;
             }
-            else if (i >= 40 && i <= 60) {
+            else if (i >= 40 && i < 60) {
                 itemsCard = 3;
             }
-            else if (i >= 60 && i <= 80) {
+            else if (i >= 60 && i < 80) {
                 itemsCard = 4;
             }
-            else if (i >= 80 && i <= 100) {
+            else if (i >= 80 && i < 100) {
                 itemsCard = 5;
             }
 
@@ -97,11 +97,11 @@ function setActive() {
             this.className += " active";
 
             // Arithmetically returns the ID of the choice made.
-            let choiceID = selectedCard.getElementById(itemsCard + "driver" + (i-((itemsCard-1)*20)));
+            let choiceId = (i + 1) - (( itemsCard - 1 ) * 20);
 
             // Sets the choice ID and question number as cookies.
-            Cookies.set("choiceId", choiceID);
-            Cookies.set("questionNum", itemsCard);
+            Cookies.set("choiceCookie", choiceId);
+            Cookies.set("questionCookie", itemsCard);
 
             // Runs a function to make a prediction.
             makePrediction();
