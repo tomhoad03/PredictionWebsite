@@ -1,7 +1,5 @@
 package server.controllers;
 
-import server.Logger;
-
 import server.models.Prediction;
 import server.models.services.PredictionService;
 
@@ -25,8 +23,6 @@ public class PredictionController {
                        @CookieParam("questionNum") Cookie questionNum) {
 
         int userId = getUserId(sessionToken.getValue());
-
-        Logger.log("Makes a prediction.");
 
         return PredictionService.insert(new Prediction(Prediction.nextId(), userId, Integer.parseInt(questionNum.getValue()), Integer.parseInt(choiceId.getValue())));
     }

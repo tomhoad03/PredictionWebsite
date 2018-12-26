@@ -96,11 +96,12 @@ function setActive() {
             // Sets the state of the item that was clicked on to active.
             this.className += " active";
 
-            let choiceID = selectedCard.getElementById(selectedCard + driver + j);
+            // Arithmetically returns the ID of the choice made.
+            let choiceID = selectedCard.getElementById(itemsCard + "driver" + (i-((itemsCard-1)*20)));
 
             // Sets the choice ID and question number as cookies.
-            Cookies.set("choiceId",);
-            Cookies.set("questionNum", selectedCard);
+            Cookies.set("choiceId", choiceID);
+            Cookies.set("questionNum", itemsCard);
 
             // Runs a function to make a prediction.
             makePrediction();
