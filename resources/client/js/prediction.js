@@ -67,25 +67,23 @@ function setActive() {
             let itemsCard = null;
 
             // Returns the card that choice is made in.
-            switch (i) {
-                case i >= 0 && i < 20:
+            switch (true) {
+                case (i >= 0 && i < 20):
                     itemsCard = 1;
                     break;
-                case i >= 20 && i < 40:
+                case (i >= 20 && i < 40):
                     itemsCard = 2;
                     break;
-                case i >= 40 && i < 60:
+                case (i >= 40 && i < 60):
                     itemsCard = 3;
                     break;
-                case i >= 60 && i < 80:
+                case (i >= 60 && i < 80):
                     itemsCard = 4;
                     break;
-                case i >= 80 && i < 100:
+                case (i >= 80 && i < 100):
                     itemsCard = 5;
                     break;
             }
-
-            alert(itemsCard);
 
             // Gets the card that the item exists in.
             let selectedCard = document.getElementById("dropmenu" + itemsCard);
