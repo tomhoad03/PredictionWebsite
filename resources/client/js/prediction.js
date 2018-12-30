@@ -85,6 +85,8 @@ function setActive() {
                     break;
             }
 
+            alert(itemsCard);
+
             // Gets the card that the item exists in.
             let selectedCard = document.getElementById("dropmenu" + itemsCard);
 
@@ -101,6 +103,7 @@ function setActive() {
 
             // Arithmetically returns the ID of the choice made.
             let choiceId = (i + 1) - (( itemsCard - 1 ) * 20);
+
 
             // Sets the choice ID and question number as cookies.
             Cookies.set("choiceCookie", choiceId);
@@ -119,12 +122,7 @@ function makePrediction(){
         type: 'POST',
 
         success: response => {
-            if (response === "OK") {
-                alert("OK");
-            }
-            else {
-                alert(response);
-            }
+            alert(response);
         }
     });
 }

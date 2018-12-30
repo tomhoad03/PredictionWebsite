@@ -31,7 +31,7 @@ public class PredictionController {
         int questionNum = Integer.parseInt(questionCookie.getValue());
         int choiceId = Integer.parseInt(choiceCookie.getValue());
 
-        // Searches through every user in the database to find a matching user.
+        // Searches through every prediction in the database to find ones made by the user.
         PredictionService.selectAllInto(Prediction.predictions);
 
         for (Prediction p : Prediction.predictions) {
@@ -42,11 +42,6 @@ public class PredictionController {
                 // Deletes the existing prediction for the same question.
                 if (p.getQuestionNum() == questionNum) {
                     PredictionService.deleteById(p.getPredictionID());
-                }
-
-                // Checks if a prediction under the same question with the same result, has been made.
-                if (p.getChoiceID() == choiceId) {
-                    return "This choice has already been selected.";
                 }
 
                 // Makes a prediction in the database.
