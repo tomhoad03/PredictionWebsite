@@ -65,20 +65,25 @@ function setActive() {
 
             // Returns the card that the item was clicked in.
             let itemsCard = null;
+            let img = null;
 
-            // Returns the card that choice is made in.
+            // Returns the card that choice is made in. Also, using jQuery, it selects the image for the related card.
             switch (true) {
                 case (i >= 0 && i < 20):
                     itemsCard = 1;
+                    img = $('#card1img');
                     break;
                 case (i >= 20 && i < 40):
                     itemsCard = 2;
+                    img = $('#card2img');
                     break;
                 case (i >= 40 && i < 60):
                     itemsCard = 3;
+                    img = $('#card3img');
                     break;
                 case (i >= 60 && i < 70):
                     itemsCard = 4;
+                    img = $('#card4img');
                     break;
                 case (i >= 70 && i < 74):
                     itemsCard = 5;
@@ -99,24 +104,10 @@ function setActive() {
             // Sets the state of the item that was clicked on to active.
             this.className += " active";
 
-            // Arithmetically returns the ID of the choice made.
-            let choiceId = null;
-            let img = null;
 
-            switch(itemsCard) {
-                case 1:
-                    img = $('#card1img');
-                    break;
-                case 2:
-                    img = $('#card2img');
-                    break;
-                case 3:
-                    img = $('#card3img');
-                    break;
-                case 4:
-                    img = $('#card4img');
-                    break;
-            }
+
+            // Arithmetically returns the ID of the choice made and displays the image of the choice.
+            let choiceId = null;
 
             if (itemsCard < 5) {
                 choiceId = (i + 1) - ((itemsCard - 1) * 20);
