@@ -47,8 +47,6 @@ public class PredictionController {
             }
         }
 
-        Logger.log("hello");
-
         // Makes a prediction in the database.
         return PredictionService.insert(new Prediction(Prediction.nextId(), userId, questionNum, choiceId));
     }
