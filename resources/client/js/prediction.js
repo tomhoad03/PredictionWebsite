@@ -115,12 +115,23 @@ function setActive() {
                 let choiceId = (i + 1) - ((itemsCard - 1) * 20);
                 Cookies.set("choiceCookie", choiceId);
 
-                // Gets the path for the driver or teams image.
-                let imagePath = "/client/images/" + idtoImage() + ".jpeg";
+                // Makes the API request to ChoiceController.
+                $.ajax({
+                    url: '/choice/name',
+                    type: 'GET',
 
-                // Sets the image for the prediction made and makes it visible.{
-                img.attr('src', imagePath);
-                img.attr('class', 'card-img-top');
+                    success: response => {
+                        if (response !== null) {
+
+                            // Gets the path of the image location for a specific driver.
+                            let imagePath = "/client/images/" + response + ".jpg";
+
+                            // Sets the image for the prediction made and makes it visible.
+                            img.attr('src', imagePath);
+                            img.attr('class', 'card-img-top');
+                        }
+                    }
+                });
             }
             else {
 
@@ -140,19 +151,5 @@ function makePrediction(){
     $.ajax({
         url: '/predict/make',
         type: 'POST',
-    });
-}
-
-// Makes the API request to ChoiceController.
-function idtoImage() {
-    $.ajax({
-        url: '/choice/name',
-        type: 'GET',
-
-        success: response => {
-            if (response !== null) {
-                return response;
-            }
-        }
     });
 }

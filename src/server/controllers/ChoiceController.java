@@ -1,6 +1,5 @@
 package server.controllers;
 
-import server.Logger;
 import server.models.Choice;
 import server.models.services.ChoiceService;
 
@@ -17,7 +16,7 @@ public class ChoiceController {
     @Produces(MediaType.TEXT_PLAIN)
 
     public String name(@CookieParam("choiceCookie") Cookie choiceCookie,
-                          @CookieParam("questionCookie") Cookie questionCookie) {
+                       @CookieParam("questionCookie") Cookie questionCookie) {
 
         // Converts the values of the cookies into integer values.
         int choiceId = Integer.parseInt(choiceCookie.getValue());
