@@ -104,15 +104,11 @@ function setActive() {
             // Sets the state of the item that was clicked on to active.
             this.className += " active";
 
-
-
             // Arithmetically returns the ID of the choice made and displays the image of the choice.
             let choiceId = null;
 
             if (itemsCard < 5) {
                 choiceId = (i + 1) - ((itemsCard - 1) * 20);
-
-                img.attr('class', 'card-img-top');
             }
             else {
                 choiceId = (i - 69);
@@ -122,20 +118,32 @@ function setActive() {
             Cookies.set("choiceCookie", choiceId);
             Cookies.set("questionCookie", itemsCard);
 
+            // Sets the image for the prediction made.
+            let imagePath = "/client/images/" + idtoImage() + ".jpeg";
+
+            if (imagePath !== undefined) {
+                img.attr('class', 'card-img-top');
+                img.attr('src', imagePath);
+            }
+
             // Runs a function to make a prediction.
             makePrediction();
         })
     }
 }
 
+// Makes the API request to PredictionController.
 function makePrediction(){
     $.ajax({
-
         url: '/predict/make',
         type: 'POST',
+    });
+}
 
-        success: response => {
-            alert(response);
-        }
+// Makes the API request to ChoiceController.
+function idtoImage() {
+    $.ajax({
+        url: '/choice/getname',
+        type: 'GET',
     });
 }
