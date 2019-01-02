@@ -15,10 +15,10 @@ import java.io.IOException;
 public class ClientController {
 
     @GET
-    @Path("img/{path}")
+    @Path("images/{path}")
     @Produces({"image/jpeg,image/png"})
     public byte[] getImageFile(@PathParam("path") String path) {
-        return getFile("client/img/" + path);
+        return getFile("client/images/" + path);
     }
 
     @GET

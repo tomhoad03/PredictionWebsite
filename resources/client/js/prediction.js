@@ -54,6 +54,7 @@ function logout() {
 
 // Sets a drop-down items state to active, if it is selected.
 function setActive() {
+
     // Gets a list of all the drop-down items on the webpage.
     let dropdownItems = document.getElementsByClassName("dropdown-item");
 
@@ -65,22 +66,27 @@ function setActive() {
 
             // Returns the card that the item was clicked in.
             let itemsCard = null;
+            let img = null;
 
-            // Returns the card that choice is made in.
-            switch (i) {
-                case i >= 0 && i < 20:
+            // Returns the card that choice is made in. Also, using jQuery, it selects the image for the related card.
+            switch (true) {
+                case (i >= 0 && i < 20):
                     itemsCard = 1;
+                    img = $('#card1img');
                     break;
-                case i >= 20 && i < 40:
+                case (i >= 20 && i < 40):
                     itemsCard = 2;
+                    img = $('#card2img');
                     break;
-                case i >= 40 && i < 60:
+                case (i >= 40 && i < 60):
                     itemsCard = 3;
+                    img = $('#card3img');
                     break;
-                case i >= 60 && i < 80:
+                case (i >= 60 && i < 70):
                     itemsCard = 4;
+                    img = $('#card4img');
                     break;
-                case i >= 80 && i < 100:
+                case (i >= 70 && i < 74):
                     itemsCard = 5;
                     break;
             }
@@ -99,12 +105,29 @@ function setActive() {
             // Sets the state of the item that was clicked on to active.
             this.className += " active";
 
-            // Arithmetically returns the ID of the choice made.
-            let choiceId = (i + 1) - (( itemsCard - 1 ) * 20);
-
-            // Sets the choice ID and question number as cookies.
-            Cookies.set("choiceCookie", choiceId);
+            // Sets the question number as a cookie.
             Cookies.set("questionCookie", itemsCard);
+
+            // Arithmetically returns the ID of the choice made and displays the image of the choice.
+            if (itemsCard < 5) {
+
+                // Sets the choice ID as a cookie.
+                let choiceId = (i + 1) - ((itemsCard - 1) * 20);
+                Cookies.set("choiceCookie", choiceId);
+
+                // Gets the path for the driver or teams image.
+                let imagePath = "/client/images/" + idtoImage() + ".jpeg";
+
+                // Sets the image for the prediction made and makes it visible.{
+                img.attr('src', imagePath);
+                img.attr('class', 'card-img-top');
+            }
+            else {
+
+                // Sets the choice ID as a cookie.
+                let choiceId = (i - 69);
+                Cookies.set("choiceCookie", choiceId);
+            }
 
             // Runs a function to make a prediction.
             makePrediction();
@@ -112,18 +135,23 @@ function setActive() {
     }
 }
 
+// Makes the API request to PredictionController.
 function makePrediction(){
     $.ajax({
-
         url: '/predict/make',
         type: 'POST',
+    });
+}
+
+// Makes the API request to ChoiceController.
+function idtoImage() {
+    $.ajax({
+        url: '/choice/name',
+        type: 'GET',
 
         success: response => {
-            if (response === "OK") {
-                alert("OK");
-            }
-            else {
-                alert("Error: The prediction could not be made.");
+            if (response !== null) {
+                return response;
             }
         }
     });
