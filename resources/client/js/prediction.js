@@ -54,6 +54,7 @@ function logout() {
 
 // Sets a drop-down items state to active, if it is selected.
 function setActive() {
+
     // Gets a list of all the drop-down items on the webpage.
     let dropdownItems = document.getElementsByClassName("dropdown-item");
 
@@ -104,26 +105,28 @@ function setActive() {
             // Sets the state of the item that was clicked on to active.
             this.className += " active";
 
-            // Arithmetically returns the ID of the choice made and displays the image of the choice.
-            let choiceId = null;
-
-            if (itemsCard < 5) {
-                choiceId = (i + 1) - ((itemsCard - 1) * 20);
-            }
-            else {
-                choiceId = (i - 69);
-            }
-
-            // Sets the choice ID and question number as cookies.
-            Cookies.set("choiceCookie", choiceId);
+            // Sets the question number as a cookie.
             Cookies.set("questionCookie", itemsCard);
 
-            // Sets the image for the prediction made.
-            let imagePath = "/client/images/" + idtoImage() + ".jpeg";
+            // Arithmetically returns the ID of the choice made and displays the image of the choice.
+            if (itemsCard < 5) {
 
-            if (imagePath !== undefined) {
-                img.attr('class', 'card-img-top');
+                // Sets the choice ID as a cookie.
+                let choiceId = (i + 1) - ((itemsCard - 1) * 20);
+                Cookies.set("choiceCookie", choiceId);
+
+                // Gets the path for the driver or teams image.
+                let imagePath = "/client/images/" + idtoImage() + ".jpeg";
+
+                // Sets the image for the prediction made and makes it visible.{
                 img.attr('src', imagePath);
+                img.attr('class', 'card-img-top');
+            }
+            else {
+
+                // Sets the choice ID as a cookie.
+                let choiceId = (i - 69);
+                Cookies.set("choiceCookie", choiceId);
             }
 
             // Runs a function to make a prediction.
@@ -145,5 +148,9 @@ function idtoImage() {
     $.ajax({
         url: '/choice/getname',
         type: 'GET',
+
+        success: response => {
+            return response;
+        }
     });
 }
