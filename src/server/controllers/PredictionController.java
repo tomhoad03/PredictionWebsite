@@ -1,5 +1,6 @@
 package server.controllers;
 
+import server.Logger;
 import server.models.Prediction;
 import server.models.services.PredictionService;
 
@@ -43,13 +44,13 @@ public class PredictionController {
                 if (p.getQuestionNum() == questionNum) {
                     PredictionService.deleteById(p.getPredictionID());
                 }
-
-                // Makes a prediction in the database.
-                return PredictionService.insert(new Prediction(Prediction.nextId(), userId, questionNum, choiceId));
             }
         }
 
-        return "Error: The prediction could not be made.";
+        Logger.log("hello");
+
+        // Makes a prediction in the database.
+        return PredictionService.insert(new Prediction(Prediction.nextId(), userId, questionNum, choiceId));
     }
 
     // The private function to get the userId of the user from a session token.
