@@ -146,11 +146,13 @@ function makePrediction(){
 // Makes the API request to ChoiceController.
 function idtoImage() {
     $.ajax({
-        url: '/choice/getname',
+        url: '/choice/name',
         type: 'GET',
 
         success: response => {
-            return response;
+            if (response !== null) {
+                return response;
+            }
         }
     });
 }

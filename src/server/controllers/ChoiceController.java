@@ -1,5 +1,6 @@
 package server.controllers;
 
+import server.Logger;
 import server.models.Choice;
 import server.models.services.ChoiceService;
 
@@ -11,11 +12,11 @@ import javax.ws.rs.core.MediaType;
 public class ChoiceController {
 
     @GET
-    @Path("getname")
+    @Path("name")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Produces(MediaType.TEXT_PLAIN)
 
-    public String getname(@CookieParam("choiceCookie") Cookie choiceCookie,
+    public String name(@CookieParam("choiceCookie") Cookie choiceCookie,
                           @CookieParam("questionCookie") Cookie questionCookie) {
 
         // Converts the values of the cookies into integer values.
@@ -36,6 +37,6 @@ public class ChoiceController {
             }
         }
 
-        return "";
+        return null;
     }
 }
