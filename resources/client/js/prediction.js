@@ -77,10 +77,10 @@ function setActive() {
                 case (i >= 40 && i < 60):
                     itemsCard = 3;
                     break;
-                case (i >= 60 && i < 80):
+                case (i >= 60 && i < 70):
                     itemsCard = 4;
                     break;
-                case (i >= 80 && i < 100):
+                case (i >= 70 && i < 74):
                     itemsCard = 5;
                     break;
             }
@@ -100,8 +100,32 @@ function setActive() {
             this.className += " active";
 
             // Arithmetically returns the ID of the choice made.
-            let choiceId = (i + 1) - (( itemsCard - 1 ) * 20);
+            let choiceId = null;
+            let img = null;
 
+            switch(itemsCard) {
+                case 1:
+                    img = $('#card1img');
+                    break;
+                case 2:
+                    img = $('#card2img');
+                    break;
+                case 3:
+                    img = $('#card3img');
+                    break;
+                case 4:
+                    img = $('#card4img');
+                    break;
+            }
+
+            if (itemsCard < 5) {
+                choiceId = (i + 1) - ((itemsCard - 1) * 20);
+
+                img.attr('class', 'card-img-top');
+            }
+            else {
+                choiceId = (i - 69);
+            }
 
             // Sets the choice ID and question number as cookies.
             Cookies.set("choiceCookie", choiceId);
