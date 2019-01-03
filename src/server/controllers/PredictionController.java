@@ -15,10 +15,11 @@ public class PredictionController {
 
     // Defines the API request at /predict/load.
     @GET
-    @Path("load")
+    @Path("load/{i}")
     @Produces(MediaType.TEXT_PLAIN)
 
-    public int load(@CookieParam("idCookie") Cookie idCookie) {
+    public int load(@CookieParam("idCookie") Cookie idCookie,
+                    @PathParam("i") int itemNum) {
 
         int userId = Integer.parseInt(idCookie.getValue());
 
@@ -27,9 +28,12 @@ public class PredictionController {
         for (Prediction p : Prediction.predictions) {
             if (p.getUserID() == userId) {
                 int questionNum = p.getQuestionNum();
-                int choiceId = p.getChoiceID();
 
-                return (20 * (questionNum - 1)) + choiceId;
+                if (questionNum == itemNum) {
+                    int choiceId = p.getChoiceID();
+
+                    return (20 * (questionNum - 1)) + choiceId;
+                }
             }
         }
 

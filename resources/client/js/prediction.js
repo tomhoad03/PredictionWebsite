@@ -139,6 +139,7 @@ function activate(itemNum, loadingState) {
                     // Sets the image for the prediction made and makes it visible.
                     img.attr('src', imagePath);
                     img.attr('class', 'card-img-top');
+
                 }
             }
         });
@@ -150,23 +151,23 @@ function activate(itemNum, loadingState) {
         Cookies.set("choiceCookie", choiceId);
     }
 
+
     // Checks to see if the webpage is loading or making new predictions.
     if (loadingState === false) {
         // Runs a function to make a prediction.
         makePrediction();
     }
-
 }
 
 function loadPredictions() {
-    for (let i = 0; i < 5; i++) {
+    for (let i = 1; i <= 5; i++) {
         $.ajax({
-            url: '/predict/load',
+            url: '/predict/load/' + i,
             type: 'GET',
 
             success: response => {
                 if (response !== -1) {
-                    activate(response, true);
+                    activate(response - 1, true);
                 }
             }
         });
