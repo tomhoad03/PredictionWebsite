@@ -153,7 +153,6 @@ function activate(itemNum, loadingState) {
         Cookies.set("choiceCookie", choiceId);
     }
 
-
     // Checks to see if the webpage is loading or making new predictions.
     if (loadingState === false) {
         // Runs a function to make a prediction.

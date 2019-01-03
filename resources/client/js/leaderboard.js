@@ -7,6 +7,10 @@ function pageLoad() {
     checkLogin(currentPage);
 }
 
+function logout() {
+    Cookies.set("sessionToken", null);
+}
+
 // The function that will check if the user has a session token needed for the page loaded.
 function checkLogin(currentPage) {
 
@@ -23,8 +27,8 @@ function checkLogin(currentPage) {
             type: 'GET',
 
             // If the API request is made, it'll check if a valid user exists.
-            success: username => {
-                if (username === "") {
+            success: userId => {
+                if (userId === -1) {
 
                     // Forces the user to try to login again.
                     if (currentPage !== '/client/html/login.html') {
@@ -32,7 +36,7 @@ function checkLogin(currentPage) {
                     }
                 } else {
                     // Returns the username and stores it in a cookie.
-                    Cookies.set("username", username);
+                    Cookies.set("idCookie", userId);
                 }
             }
         });
@@ -45,8 +49,4 @@ function checkLogin(currentPage) {
             window.location.href = '/client/html/login.html';
         }
     }
-}
-
-function logout() {
-    Cookies.set("sessionToken", null);
 }
