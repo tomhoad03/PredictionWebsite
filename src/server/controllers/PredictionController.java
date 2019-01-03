@@ -18,20 +18,29 @@ public class PredictionController {
     @Path("load/{i}")
     @Produces(MediaType.TEXT_PLAIN)
 
+    // Passes in the loading count and userId to return the item number of the prediction.
     public int load(@CookieParam("idCookie") Cookie idCookie,
-                    @PathParam("i") int itemNum) {
+                    @PathParam("i") int questionCount) {
 
+        // Converts the value of the userId, that is stored as a cookie, into an integer value.
         int userId = Integer.parseInt(idCookie.getValue());
 
         PredictionService.selectAllInto(Prediction.predictions);
 
+        // Searches through every single prediction in the database.
         for (Prediction p : Prediction.predictions) {
+
+            // Checks to see if the prediction is made by this user.
             if (p.getUserID() == userId) {
+
+                // Gets the question number.
                 int questionNum = p.getQuestionNum();
 
-                if (questionNum == itemNum) {
+                // Checks if the question number matches the one it's activating.
+                if (questionNum == questionCount) {
                     int choiceId = p.getChoiceID();
 
+                    // Returns the item number based upon the category it is in.
                     if (questionNum != 5) {
                         return (20 * (questionNum - 1)) + choiceId;
                     }

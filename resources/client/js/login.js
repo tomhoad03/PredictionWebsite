@@ -28,7 +28,7 @@ function resetLoginForm() {
 
                     // Sends the user to where they want to go, with a session token.
                     Cookies.set("sessionToken", response);
-                    window.location.href = Cookies.get("destination");
+                    window.location.href = "/client/html/homepage.html";
                 }
             }
         });

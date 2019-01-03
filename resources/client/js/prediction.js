@@ -5,6 +5,7 @@ function pageLoad() {
     Cookies.set("destination", currentPage);
 
     checkLogin(currentPage);
+
     loadPredictions();
     setActive();
 }
