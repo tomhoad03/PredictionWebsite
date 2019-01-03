@@ -5,8 +5,8 @@ function pageLoad() {
     Cookies.set("destination", currentPage);
 
     checkLogin(currentPage);
-
     loadPredictions();
+    checkTime();
     setActive();
 }
 
@@ -51,6 +51,19 @@ function checkLogin(currentPage) {
         // Sends the user to go and login if not already there.
         if (currentPage !== '/client/html/login.html') {
             window.location.href = '/client/html/login.html';
+        }
+    }
+}
+
+function checkTime() {
+    let date = new Date;
+    let weekday = date.getDay();
+
+    if (weekday > 3) {
+        let dropdownItems = document.getElementsByClassName("dropdown-item");
+
+        for (let i = 0; i < 74; i++) {
+            dropdownItems[i].className += " disabled";
         }
     }
 }
