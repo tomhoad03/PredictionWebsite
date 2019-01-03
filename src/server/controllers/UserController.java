@@ -66,22 +66,22 @@ public class UserController {
     @Produces(MediaType.TEXT_PLAIN)
 
     // Takes the existing session token stored in a cookie and returns the users credentials.
-    public String validate(@CookieParam("sessionToken") Cookie sessionCookie) {
+    public int validate(@CookieParam("sessionToken") Cookie sessionCookie) {
 
         // Sets the session users details if the session token is valid.
-        String sessionUser = validateSessionCookie(sessionCookie);
+        int sessionUserId = validateSessionCookie(sessionCookie);
 
         // Returns the username of the user if one has a valid session token.
-        if (sessionUser == null) {
+        if (sessionUserId == -1) {
             Logger.log("Error: Invalid user session token.");
-            return "";
+            return -1;
         } else {
-            return sessionUser;
+            return sessionUserId;
         }
     }
 
     // Checks if the session token in the session cookie is valid.
-    private static String validateSessionCookie(Cookie sessionCookie) {
+    private static int validateSessionCookie(Cookie sessionCookie) {
 
         // If the session cookie stores a value, it proceeds, else it returns null.
         if (sessionCookie != null) {
@@ -100,12 +100,12 @@ public class UserController {
                     // If a user has that session token, the username is returned.
                     if (u.getSessionToken().equals(sessionToken)) {
                         Logger.log("Valid session token received.");
-                        return u.getUsername();
+                        return u.getUserID();
                     }
                 }
             }
         }
-        return null;
+        return -1;
     }
 
     // Defines the API request at /user/create.

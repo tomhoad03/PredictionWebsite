@@ -1,6 +1,5 @@
 package server.controllers;
 
-import server.Logger;
 import server.models.Prediction;
 import server.models.services.PredictionService;
 
@@ -14,6 +13,29 @@ import javax.ws.rs.core.MediaType;
 @Path("predict/")
 public class PredictionController {
 
+    // Defines the API request at /predict/load.
+    @GET
+    @Path("load")
+    @Produces(MediaType.TEXT_PLAIN)
+
+    public int load(@CookieParam("idCookie") Cookie idCookie) {
+
+        int userId = Integer.parseInt(idCookie.getValue());
+
+        PredictionService.selectAllInto(Prediction.predictions);
+
+        for (Prediction p : Prediction.predictions) {
+            if (p.getUserID() == userId) {
+                int questionNum = p.getQuestionNum();
+                int choiceId = p.getChoiceID();
+
+                return (20 * (questionNum - 1)) + choiceId;
+            }
+        }
+
+        return -1;
+    }
+
     // Defines the API request at /predict/make.
     @POST
     @Path("make")
@@ -21,14 +43,12 @@ public class PredictionController {
     @Produces(MediaType.TEXT_PLAIN)
 
     // Takes the choice, question and user details to make a prediction for that user.
-    public String make(@CookieParam("sessionToken") Cookie sessionToken,
+    public String make(@CookieParam("idCookie") Cookie idCookie,
                        @CookieParam("choiceCookie") Cookie choiceCookie,
                        @CookieParam("questionCookie") Cookie questionCookie) {
 
-        // Returns the userId of the user.
-        int userId = getUserId(sessionToken.getValue());
-
         // Converts the values of the cookies into integer values.
+        int userId = Integer.parseInt(idCookie.getValue());
         int questionNum = Integer.parseInt(questionCookie.getValue());
         int choiceId = Integer.parseInt(choiceCookie.getValue());
 
@@ -49,18 +69,5 @@ public class PredictionController {
 
         // Makes a prediction in the database.
         return PredictionService.insert(new Prediction(Prediction.nextId(), userId, questionNum, choiceId));
-    }
-
-    // The private function to get the userId of the user from a session token.
-    private static int getUserId(String sessionToken) {
-        UserService.selectAllInto(User.users);
-
-        for (User u : User.users) {
-            if (u.getSessionToken().equals(sessionToken)) {
-                return u.getUserID();
-            }
-        }
-
-        return -1;
     }
 }

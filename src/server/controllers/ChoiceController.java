@@ -10,6 +10,7 @@ import javax.ws.rs.core.MediaType;
 @Path("choice/")
 public class ChoiceController {
 
+    // Defines the API request at /choice/name.
     @GET
     @Path("name")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
