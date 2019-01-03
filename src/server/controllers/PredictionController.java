@@ -41,7 +41,7 @@ public class PredictionController {
                     int choiceId = p.getChoiceID();
 
                     // Returns the item number based upon the category it is in.
-                    if (questionNum != 5) {
+                    if (questionNum < 4) {
                         return (20 * (questionNum - 1)) + choiceId;
                     }
                     else {

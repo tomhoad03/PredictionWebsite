@@ -55,13 +55,20 @@ function checkLogin(currentPage) {
     }
 }
 
+// Checks if the users can make predictions at this time.
 function checkTime() {
+
+    // Gets the day of the week.
     let date = new Date;
     let weekday = date.getDay();
 
-    if (weekday > 3) {
+    // Checks if it's the weekend.
+    if (weekday > 4) {
+
+        // Gets all the dropdown menu items on the webpage.
         let dropdownItems = document.getElementsByClassName("dropdown-item");
 
+        // Disables every dropdown item.
         for (let i = 0; i < 74; i++) {
             dropdownItems[i].className += " disabled";
         }
@@ -78,9 +85,14 @@ function setActive() {
     for (let i = 0; i < dropdownItems.length; i++) {
 
         // The event listener runs the following function when clicked.
-        dropdownItems[i].addEventListener("click", function(){
-            // Uses an anonymous function to run the actual function to run so that parameters can be passed in.
-            activate(i, false);
+        dropdownItems[i].addEventListener("click", function() {
+
+            // Prevents the function from running if the items are all disabled.
+            if (dropdownItems[i].className !== "dropdown-item disabled") {
+
+                // Uses an anonymous function to run the actual function to run so that parameters can be passed in.
+                activate(i, false);
+            }
         });
     }
 }
@@ -139,6 +151,12 @@ function activate(itemNum, loadingState) {
 
         // Sets the choice ID as a cookie.
         let choiceId = (itemNum + 1) - ((itemsCard - 1) * 20);
+
+        // Increases the choiceId, if it is a team prediction.
+        if (itemsCard === 4) {
+            choiceId += 20;
+        }
+
         Cookies.set("choiceCookie", choiceId);
 
         // Makes the API request to ChoiceController.
