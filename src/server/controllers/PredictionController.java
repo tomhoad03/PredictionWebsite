@@ -32,11 +32,15 @@ public class PredictionController {
                 if (questionNum == itemNum) {
                     int choiceId = p.getChoiceID();
 
-                    return (20 * (questionNum - 1)) + choiceId;
+                    if (questionNum != 5) {
+                        return (20 * (questionNum - 1)) + choiceId;
+                    }
+                    else {
+                        return choiceId + 40;
+                    }
                 }
             }
         }
-
         return -1;
     }
 

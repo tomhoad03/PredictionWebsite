@@ -149,7 +149,7 @@ function activate(itemNum, loadingState) {
     else {
 
         // Sets the choice ID as a cookie.
-        let choiceId = (itemNum - 69);
+        let choiceId = (itemNum - 39);
         Cookies.set("choiceCookie", choiceId);
     }
 
@@ -166,10 +166,8 @@ function loadPredictions() {
             url: '/predict/load/' + i,
             type: 'GET',
 
-            success: response => {
-                if (response !== -1) {
-                    activate(response - 1, true);
-                }
+            success: itemNum => {
+                activate(itemNum - 1, true);
             }
         });
     }
