@@ -113,7 +113,9 @@ function activate(itemNum, loadingState) {
     }
 
     // Sets the state of the item that was clicked on to active.
-    this.className += " active";
+    let dropdownItems = document.getElementsByClassName("dropdown-item");
+
+    dropdownItems[itemNum].className += " active";
 
     // Sets the question number as a cookie.
     Cookies.set("questionCookie", itemsCard);
