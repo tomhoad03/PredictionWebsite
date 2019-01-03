@@ -13,6 +13,9 @@ import server.Logger;
 import server.models.User;
 import server.models.services.UserService;
 
+import server.models.Leaderboard;
+import server.models.services.LeaderboardService;
+
 import java.util.UUID;
 
 //States the wider API path.
@@ -147,8 +150,13 @@ public class UserController {
         // Creates the hashed password by using the generateHash() algorithm.
         String hashedPassword = generateHash(newPassword + salt);
 
+        int userId = User.nextId();
+
+        // Instantiates the new user as an object and adds it to the database leaderboard.
+        UserService.insert(new User(userId, newUsername, newEmail, hashedPassword, salt, null));
+
         // Instantiates a new user as an object and adds it to the database.
-        return UserService.insert(new User(User.nextId(), newUsername, newEmail, hashedPassword, salt, null));
+        return LeaderboardService.insert(new Leaderboard(userId, 0, 0));
     }
 
     // Hashes the password with the added salt.

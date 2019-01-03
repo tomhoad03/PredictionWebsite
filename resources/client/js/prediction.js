@@ -55,7 +55,7 @@ function checkLogin(currentPage) {
     }
 }
 
-// Sets a drop-down items state to active, if it is selected.
+// Sets a drop-down items state to active if it is selected.
 function setActive() {
 
     // Gets a list of all the drop-down items on the webpage.
@@ -66,7 +66,7 @@ function setActive() {
 
         // The event listener runs the following function when clicked.
         dropdownItems[i].addEventListener("click", function(){
-            // Uses an anonymous function to run the actual function to run, so that parameters can be passed in.
+            // Uses an anonymous function to run the actual function to run so that parameters can be passed in.
             activate(i, false);
         });
     }
@@ -161,6 +161,7 @@ function activate(itemNum, loadingState) {
     }
 }
 
+// Makes an API request to the PredictionController.
 function loadPredictions() {
     for (let i = 1; i <= 5; i++) {
         $.ajax({
@@ -174,7 +175,7 @@ function loadPredictions() {
     }
 }
 
-// Makes the API request to PredictionController.
+// Makes an API request to the PredictionController.
 function makePrediction(){
     $.ajax({
         url: '/predict/make',
