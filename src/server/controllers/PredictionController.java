@@ -1,10 +1,9 @@
 package server.controllers;
 
+import server.Logger;
+
 import server.models.Prediction;
 import server.models.services.PredictionService;
-
-import server.models.User;
-import server.models.services.UserService;
 
 import server.models.Leaderboard;
 import server.models.services.LeaderboardService;
@@ -102,10 +101,12 @@ public class PredictionController {
 
         // The question answers. The number represents the choiceId of the answer.
         int question1Answer = 1;
-        int question2Answer = 6;
-        int question3Answer = 3;
-        int question4Answer = 24;
+        int question2Answer = 1;
+        int question3Answer = 1;
+        int question4Answer = 21;
         int question5Answer = 31;
+
+        String success = "";
 
         // Gets all the predictions from the database.
         PredictionService.selectAllInto(Prediction.predictions);
@@ -118,52 +119,59 @@ public class PredictionController {
                 case 1:
 
                     // If their answer is correct for question 1, the scoring function is run.
-                    if (p.getChoiceID() == question1Answer) {
-                        addScore(p.getUserID());
+                    if (question1Answer == p.getChoiceID()) {
+                        success = addScore(p.getUserID());
                     }
                     break;
 
                 case 2:
 
                     // If their answer is correct for question 2, the scoring function is run.
-                    if (p.getChoiceID() == question2Answer) {
-                        addScore(p.getUserID());
+                    if (question2Answer == p.getChoiceID()) {
+                        success = addScore(p.getUserID());
                     }
                     break;
 
                 case 3:
 
                     // If their answer is correct for question 3, the scoring function is run.
-                    if (p.getChoiceID() == question3Answer) {
-                        addScore(p.getUserID());
+                    if (question3Answer == p.getChoiceID()) {
+                        success = addScore(p.getUserID());
                     }
                     break;
 
                 case 4:
 
                     // If their answer is correct for question 4, the scoring function is run.
-                    if (p.getChoiceID() == question4Answer) {
-                        addScore(p.getUserID());
+                    if (question4Answer == p.getChoiceID()) {
+                        success = addScore(p.getUserID());
                     }
                     break;
 
                 case 5:
 
                     // If their answer is correct for question 5, the scoring function is run.
-                    if (p.getChoiceID() == question5Answer) {
-                        addScore(p.getUserID());
+                    if (question5Answer == p.getChoiceID()) {
+                        success = addScore(p.getUserID());
                     }
                     break;
+
+                default:
+                    Logger.log("This was an invalid prediction.");
             }
 
-            // Deletes the prediction once it has been scored.
-            PredictionService.deleteById(p.getPredictionID());
+            if (success.equals("OK")) {
+                PredictionService.deleteById(p.getPredictionID());
+            }
+
         }
 
-        return "Scored.";
+        return "Scoring";
     }
 
-    private void addScore(int userId) {
+    private String addScore(int userId) {
+
+        Logger.log("Scoring...");
 
         // Gets the user from the leaderboard.
         Leaderboard currentUser = LeaderboardService.selectById(userId);
@@ -172,6 +180,6 @@ public class PredictionController {
         currentUser.setTotalPoints(currentUser.getTotalPoints() + 5);
 
         // Updates the record in the leaderboard.
-        LeaderboardService.update(currentUser);
+        return LeaderboardService.update(currentUser);
     }
 }

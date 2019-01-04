@@ -5,8 +5,8 @@ function pageLoad() {
     Cookies.set("destination", currentPage);
 
     checkLogin(currentPage);
-    loadPredictions();
     checkTime();
+    loadPredictions();
     setActive();
 }
 
@@ -54,7 +54,6 @@ function checkLogin(currentPage) {
         }
     }
 }
-
 // Checks if the users can make predictions at this time.
 function checkTime() {
 
@@ -72,9 +71,17 @@ function checkTime() {
         for (let i = 0; i < 74; i++) {
             dropdownItems[i].className += " disabled";
         }
+
+        $.ajax({
+            url: '/predict/score',
+            type: 'POST',
+
+            success: response => {
+                alert(response);
+            }
+        });
     }
 }
-
 // Sets a drop-down items state to active if it is selected.
 function setActive() {
 
@@ -189,6 +196,9 @@ function activate(itemNum, loadingState) {
     if (loadingState === false) {
         // Runs a function to make a prediction.
         makePrediction();
+
+        Cookies.set("choiceCookie", null);
+        Cookies.set("questionCookie", null);
     }
 }
 
