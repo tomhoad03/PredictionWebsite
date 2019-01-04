@@ -6,6 +6,9 @@ import server.models.services.PredictionService;
 import server.models.User;
 import server.models.services.UserService;
 
+import server.models.Leaderboard;
+import server.models.services.LeaderboardService;
+
 import javax.ws.rs.*;
 import javax.ws.rs.core.Cookie;
 import javax.ws.rs.core.MediaType;
@@ -86,5 +89,89 @@ public class PredictionController {
 
         // Makes a prediction in the database.
         return PredictionService.insert(new Prediction(Prediction.nextId(), userId, questionNum, choiceId));
+    }
+
+    // Defines the API request at /predict/score.
+    @POST
+    @Path("score")
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    @Produces(MediaType.TEXT_PLAIN)
+
+    // Determines if the answer matches. If the user is correct, points are added to their total.
+    public String score() {
+
+        // The question answers. The number represents the choiceId of the answer.
+        int question1Answer = 1;
+        int question2Answer = 6;
+        int question3Answer = 3;
+        int question4Answer = 24;
+        int question5Answer = 31;
+
+        // Gets all the predictions from the database.
+        PredictionService.selectAllInto(Prediction.predictions);
+
+        for (Prediction p : Prediction.predictions) {
+
+            // Checks the question number of the prediction.
+            switch (p.getQuestionNum()) {
+
+                case 1:
+
+                    // If their answer is correct for question 1, the scoring function is run.
+                    if (p.getChoiceID() == question1Answer) {
+                        addScore(p.getUserID());
+                    }
+                    break;
+
+                case 2:
+
+                    // If their answer is correct for question 2, the scoring function is run.
+                    if (p.getChoiceID() == question2Answer) {
+                        addScore(p.getUserID());
+                    }
+                    break;
+
+                case 3:
+
+                    // If their answer is correct for question 3, the scoring function is run.
+                    if (p.getChoiceID() == question3Answer) {
+                        addScore(p.getUserID());
+                    }
+                    break;
+
+                case 4:
+
+                    // If their answer is correct for question 4, the scoring function is run.
+                    if (p.getChoiceID() == question4Answer) {
+                        addScore(p.getUserID());
+                    }
+                    break;
+
+                case 5:
+
+                    // If their answer is correct for question 5, the scoring function is run.
+                    if (p.getChoiceID() == question5Answer) {
+                        addScore(p.getUserID());
+                    }
+                    break;
+            }
+
+            // Deletes the prediction once it has been scored.
+            PredictionService.deleteById(p.getPredictionID());
+        }
+
+        return "Scored.";
+    }
+
+    private void addScore(int userId) {
+
+        // Gets the user from the leaderboard.
+        Leaderboard currentUser = LeaderboardService.selectById(userId);
+
+        // Adds points to the user.
+        currentUser.setTotalPoints(currentUser.getTotalPoints() + 5);
+
+        // Updates the record in the leaderboard.
+        LeaderboardService.update(currentUser);
     }
 }
