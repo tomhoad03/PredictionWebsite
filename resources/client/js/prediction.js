@@ -27,7 +27,7 @@ function checkLogin(currentPage) {
         $.ajax({
 
             // Defines the API at /user/validate as the GET API request to be made.
-            url: '/user/validate',
+            url: '/user/validate/',
             type: 'GET',
 
             // If the API request is made, it'll check if a valid user exists.
