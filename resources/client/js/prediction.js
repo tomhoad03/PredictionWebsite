@@ -12,7 +12,7 @@ function pageLoad() {
 
 // Will logout the user if they hit the button by removing the existing session token.
 function logout() {
-    Cookies.set("sessionToken", null);
+    Cookies.set("sessionToken", undefined);
 }
 
 // The function that will check if the user has a session token needed for the page loaded.

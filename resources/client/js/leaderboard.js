@@ -8,7 +8,7 @@ function pageLoad() {
 }
 
 function logout() {
-    Cookies.set("sessionToken", null);
+    Cookies.set("sessionToken", undefined);
 }
 
 // The function that will check if the user has a session token needed for the page loaded.

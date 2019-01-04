@@ -1,3 +1,10 @@
+function pageLoad() {
+    // Resets the current session token.
+    Cookies.set("sessionToken", undefined);
+
+    resetLoginForm();
+}
+
 // Runs an API request by the client when the form is submitted.
 function resetLoginForm() {
 
@@ -22,7 +29,10 @@ function resetLoginForm() {
             // Gets the names of the input boxes from the form and sends them to the server.
             data: loginForm.serialize(),
             success: response => {
+
+                // Determines the response when logging in.
                 if (response.startsWith('Error:')) {
+
                     alert(response);
                 } else {
 
