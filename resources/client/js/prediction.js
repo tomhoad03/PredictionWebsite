@@ -71,17 +71,9 @@ function checkTime() {
         for (let i = 0; i < 74; i++) {
             dropdownItems[i].className += " disabled";
         }
-
-        $.ajax({
-            url: '/predict/score',
-            type: 'POST',
-
-            success: response => {
-                alert(response);
-            }
-        });
     }
 }
+
 // Sets a drop-down items state to active if it is selected.
 function setActive() {
 
