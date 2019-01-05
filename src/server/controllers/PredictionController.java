@@ -160,18 +160,19 @@ public class PredictionController {
                     Logger.log("This was an invalid prediction.");
             }
 
+            // Deletes the prediction.
             if (success.equals("OK")) {
                 PredictionService.deleteById(p.getPredictionID());
             }
 
         }
 
-        return "Scoring";
+        return "Scored";
     }
 
     private String addScore(int userId) {
 
-        Logger.log("Scoring...");
+        Logger.log("Scoring");
 
         // Gets the user from the leaderboard.
         Leaderboard currentUser = LeaderboardService.selectById(userId);

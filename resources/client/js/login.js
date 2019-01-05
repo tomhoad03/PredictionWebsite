@@ -1,6 +1,6 @@
 function pageLoad() {
     // Resets the current session token.
-    Cookies.set("sessionToken", undefined);
+    Cookies.remove("sessionToken");
 
     resetLoginForm();
 }

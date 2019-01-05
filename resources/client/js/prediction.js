@@ -1,22 +1,35 @@
 function pageLoad() {
 
-    // Stores the URL of the current page.
-    let currentPage = window.location.href;
-    Cookies.set("destination", currentPage);
+    // Checks if a session token is available.
+    checkLogin();
 
-    checkLogin(currentPage);
-    checkTime();
+    // Loads images and predictions into the webpage.
     loadPredictions();
+
+    // Checks to see if the user can make predictions at this time.
+    checkTime();
+
+    // Adds event listeners to dropdown items so they can make predictions.
     setActive();
 }
 
 // Will logout the user if they hit the button by removing the existing session token.
 function logout() {
-    Cookies.set("sessionToken", undefined);
+    Cookies.remove("sessionToken");
+
+    window.location.href = '/client/html/login.html';
+}
+
+// Will score the users if the temporary navbar button is pressed.
+function scoreUsers() {
+    $.ajax({
+        url: '/predict/score',
+        type: 'POST',
+    });
 }
 
 // The function that will check if the user has a session token needed for the page loaded.
-function checkLogin(currentPage) {
+function checkLogin() {
 
     // Gets the current session token.
     let token = Cookies.get("sessionToken");
@@ -35,25 +48,36 @@ function checkLogin(currentPage) {
                 if (userId === -1) {
 
                     // Forces the user to try to login again.
-                    if (currentPage !== '/client/html/login.html') {
-                        window.location.href = '/client/html/login.html';
-                    }
+                    window.location.href = '/client/html/login.html';
                 } else {
+
                     // Returns the username and stores it in a cookie.
                     Cookies.set("idCookie", userId);
                 }
             }
         });
 
-        // If the token is undefined, no user is logged in.
     } else {
 
-        // Sends the user to go and login if not already there.
-        if (currentPage !== '/client/html/login.html') {
-            window.location.href = '/client/html/login.html';
-        }
+        // If the token is undefined, no user is logged in.
+        logout();
     }
 }
+
+// Makes an API request to the PredictionController.
+function loadPredictions() {
+    for (let i = 1; i <= 5; i++) {
+        $.ajax({
+            url: '/predict/load/' + i,
+            type: 'GET',
+
+            success: itemNum => {
+                activate(itemNum - 1, true);
+            }
+        });
+    }
+}
+
 // Checks if the users can make predictions at this time.
 function checkTime() {
 
@@ -189,22 +213,8 @@ function activate(itemNum, loadingState) {
         // Runs a function to make a prediction.
         makePrediction();
 
-        Cookies.set("choiceCookie", null);
-        Cookies.set("questionCookie", null);
-    }
-}
-
-// Makes an API request to the PredictionController.
-function loadPredictions() {
-    for (let i = 1; i <= 5; i++) {
-        $.ajax({
-            url: '/predict/load/' + i,
-            type: 'GET',
-
-            success: itemNum => {
-                activate(itemNum - 1, true);
-            }
-        });
+        Cookies.remove("choiceCookie");
+        Cookies.remove("questionCookie");
     }
 }
 
