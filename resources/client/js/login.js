@@ -5,6 +5,11 @@ function pageLoad() {
     resetLoginForm();
 }
 
+// Sends the user to the create account webpage.
+function toNewUser() {
+    window.location.href = "/client/html/newuser.html";
+}
+
 // Runs an API request by the client when the form is submitted.
 function resetLoginForm() {
 
@@ -36,15 +41,11 @@ function resetLoginForm() {
                     alert(response);
                 } else {
 
-                    // Sends the user to where they want to go, with a session token.
+                    // Sends the user to we homepage, with a valid session token.
                     Cookies.set("sessionToken", response);
                     window.location.href = "/client/html/homepage.html";
                 }
             }
         });
     });
-}
-
-function toNewUser() {
-    window.location.href = "/client/html/newuser.html";
 }
