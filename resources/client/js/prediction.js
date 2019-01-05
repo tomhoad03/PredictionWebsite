@@ -15,8 +15,8 @@ function pageLoad() {
 
 // Will logout the user if they hit the button by removing the existing session token.
 function logout() {
-    Cookies.remove("sessionToken");
 
+    Cookies.remove("sessionToken");
     window.location.href = '/client/html/login.html';
 }
 
@@ -72,6 +72,8 @@ function loadPredictions() {
             type: 'GET',
 
             success: itemNum => {
+
+                // Runs the same function to load the images and active buttons.
                 activate(itemNum - 1, true);
             }
         });
@@ -89,11 +91,11 @@ function checkTime() {
     if (weekday > 4) {
 
         // Gets all the dropdown menu items on the webpage.
-        let dropdownItems = document.getElementsByClassName("dropdown-item");
+        let dropdownItems = document.getElementsByClassName("dropdown-item" || "dropdown-item active");
 
         // Disables every dropdown item.
         for (let i = 0; i < 74; i++) {
-            dropdownItems[i].className += " disabled";
+            dropdownItems[i].className = "dropdown-item disabled";
         }
     }
 }
