@@ -15,7 +15,6 @@ function pageLoad() {
 
 // Will logout the user if they hit the button by removing the existing session token.
 function logout() {
-
     Cookies.remove("sessionToken");
     window.location.href = '/client/html/login.html';
 }
@@ -88,7 +87,7 @@ function checkTime() {
     let weekday = date.getDay();
 
     // Checks if it's the weekend.
-    if (weekday > 4) {
+    if (weekday === 0 || weekday === 6) {
 
         // Gets all the dropdown menu items on the webpage.
         let dropdownItems = document.getElementsByClassName("dropdown-item" || "dropdown-item active");
