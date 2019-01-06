@@ -1,5 +1,6 @@
 package server.controllers;
 
+import server.Logger;
 import server.models.Leaderboard;
 import server.models.services.LeaderboardService;
 
@@ -19,11 +20,21 @@ public class LeaderboardController {
         // Selects all the records in the leaderboard, in order of total points.
         LeaderboardService.selectAllInto(Leaderboard.leaderboards);
 
+        // Uses a counter to determine the position.
         int position = 1;
 
         for (Leaderboard l: Leaderboard.leaderboards) {
+            // Sets the position of this users.
             l.setPosition(position);
+
+            // Updates the users ranking in the database.
+            LeaderboardService.update(l);
+
+            // Increments the position by one.
+            position++;
         }
+
+        return "OK";
     }
 
 }

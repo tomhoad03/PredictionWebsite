@@ -18,7 +18,11 @@ function scoreUsers() {
 
         success: response => {
             if (response === "Scored") {
-                calculatePosition();
+
+                // Runs  the function called calculatePosition() from leaderboard.js.
+                $.getScript("/client/js/leaderboard.js", function () {
+                    calculatePosition();
+                });
             }
         }
     });
