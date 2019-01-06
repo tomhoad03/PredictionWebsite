@@ -15,6 +15,12 @@ function scoreUsers() {
     $.ajax({
         url: '/predict/score',
         type: 'POST',
+
+        success: response => {
+            if (response === "Scored") {
+                calculatePosition();
+            }
+        }
     });
 }
 

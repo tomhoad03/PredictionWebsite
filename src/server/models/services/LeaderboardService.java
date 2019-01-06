@@ -15,7 +15,7 @@ public class LeaderboardService {
         targetList.clear();
         try {
             PreparedStatement statement = DatabaseConnection.newStatement(
-                    "SELECT UserID, TotalPoints, Position FROM Leaderboards"
+                    "SELECT UserID, TotalPoints, Position FROM Leaderboards ORDER BY TotalPoints DESC"
             );
             if (statement != null) {
                 ResultSet results = statement.executeQuery();

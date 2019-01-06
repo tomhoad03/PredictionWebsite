@@ -7,7 +7,6 @@ function pageLoad() {
 // Will logout the user if they hit the button by removing the existing session token.
 function logout() {
     Cookies.remove("sessionToken");
-
     window.location.href = '/client/html/login.html';
 }
 
@@ -45,4 +44,11 @@ function checkLogin() {
         // If the token is undefined, no user is logged in.
         logout();
     }
+}
+
+function calculatePosition() {
+    $.ajax({
+        url: '/leaderboard/position',
+        type: 'POST',
+    });
 }
