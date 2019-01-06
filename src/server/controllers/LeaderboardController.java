@@ -1,6 +1,5 @@
 package server.controllers;
 
-import server.Logger;
 import server.models.Leaderboard;
 import server.models.services.LeaderboardService;
 
@@ -10,11 +9,13 @@ import javax.ws.rs.core.MediaType;
 @Path("leaderboard/")
 public class LeaderboardController {
 
+    // Defines the API request at /leaderboard/position.
     @POST
     @Path("position")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Produces(MediaType.TEXT_PLAIN)
 
+    // Assigns the leaderboard position of the users.
     public String position(){
 
         // Selects all the records in the leaderboard, in order of total points.
