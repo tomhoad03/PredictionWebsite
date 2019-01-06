@@ -2,15 +2,6 @@ function pageLoad() {
 
     // Checks if a session token is available.
     checkLogin();
-
-    // Loads images and predictions into the webpage.
-    loadPredictions();
-
-    // Checks to see if the user can make predictions at this time.
-    checkTime();
-
-    // Adds event listeners to dropdown items so they can make predictions.
-    setActive();
 }
 
 // Will logout the user if they hit the button by removing the existing session token.
@@ -52,6 +43,15 @@ function checkLogin() {
 
                     // Returns the username and stores it in a cookie.
                     Cookies.set("idCookie", userId);
+
+                    // Loads images and predictions into the webpage.
+                    loadPredictions();
+
+                    // Checks to see if the user can make predictions at this time.
+                    checkTime();
+
+                    // Adds event listeners to dropdown items so they can make predictions.
+                    setActive();
                 }
             }
         });
