@@ -172,8 +172,6 @@ public class PredictionController {
 
     private String addScore(int userId) {
 
-        Logger.log("Scoring");
-
         // Gets the user from the leaderboard.
         Leaderboard currentUser = LeaderboardService.selectById(userId);
 
