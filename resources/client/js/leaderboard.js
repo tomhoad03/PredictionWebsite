@@ -73,7 +73,7 @@ function loadLeaderboard() {
             else {
                 // Creates the beginning of a table.
                 let leaderboardHTML = `<div class="container">`
-                                        + `<table class="table table-striped">`
+                                        + `<table class="table">`
                                             + `<thead class="thead-dark">`
                                                 + `<tr>`
                                                     + `<th scope="col">Position:</th>`
@@ -85,11 +85,27 @@ function loadLeaderboard() {
 
                 // For every user on the leaderboard, their details are added in this format.
                 for (let leaderboard of leaderboardList) {
-                    leaderboardHTML += `<tr>`
-                                        + `<th scope="row">${leaderboard.position}</th>`
-                                        + `<td>${leaderboard.username}</td>`
-                                        + `<td>${leaderboard.totalPoints}</td>`
-                                        + `</tr>`;
+
+                    // Gets the UserID, stored in the list.
+                    let userId = leaderboard.userID;
+
+                    // Checks if the record matches that of the existing user.
+                    if (userId === parseInt(Cookies.get("idCookie"))) {
+
+                        // Highlights the row.
+                        leaderboardHTML += `<tr class="table-active">`
+                    }
+                    else {
+
+                        // Creates a normal row.
+                        leaderboardHTML += `<tr>`
+                    }
+
+                    // Finishes of the rest of the row.
+                    leaderboardHTML += `<th scope="row">${leaderboard.position}</th>`
+                                    + `<td>${leaderboard.username}</td>`
+                                    + `<td>${leaderboard.totalPoints}</td>`
+                                    + `</tr>`;
                 }
 
                 // Adds the final remains of the table.
@@ -99,6 +115,8 @@ function loadLeaderboard() {
 
                 // Adds the contents to the div with id #leaderboard.
                 $('#leaderboardDisplay').html(leaderboardHTML);
+
+
             }
         }
     });
