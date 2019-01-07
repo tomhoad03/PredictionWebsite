@@ -1,11 +1,18 @@
 package server.controllers;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 import server.models.Leaderboard;
 import server.models.services.LeaderboardService;
+
+import server.models.User;
+import server.models.services.UserService;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
+@SuppressWarnings("unchecked")
 @Path("leaderboard/")
 public class LeaderboardController {
 
@@ -36,6 +43,53 @@ public class LeaderboardController {
         }
 
         return "OK";
+    }
+
+    // Defines the API request at /leaderboard/display.
+    @GET
+    @Path("display")
+    @Consumes(MediaType.APPLICATION_JSON)
+
+    public String display() {
+
+        // Gets all of the records from the leaderboard.
+        String status = LeaderboardService.selectAllInto(Leaderboard.leaderboards);
+
+        if (status.equals("OK")) {
+
+            // Gets all of the users.
+            UserService.selectAllInto(User.users);
+
+            // Creates an array to store a leaderboard in.
+            JSONArray leaderboard = new JSONArray();
+
+            // Looks at every user in the leaderboard.
+            for (Leaderboard l : Leaderboard.leaderboards) {
+
+                // Converts the leaderboard record into a JSON object.
+                JSONObject jl = l.toJSON();
+
+                // Looks for matching users.
+                for (User u : User.users) {
+
+                    // Returns the username of the matching user.
+                    if (u.getUserID() == l.getUserID()) {
+                        jl.put("username", u.getUsername());
+                        break;
+                    }
+                }
+
+                leaderboard.add(jl);
+            }
+
+            // Converts the leaderboard back from the JSON form.
+            return leaderboard.toString();
+        }
+        else {
+            JSONObject response = new JSONObject();
+            response.put("error", status);
+            return response.toString();
+        }
     }
 
 }
