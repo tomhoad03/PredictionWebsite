@@ -1,6 +1,4 @@
 function pageLoad() {
-    setColours();
-
     // Checks if a session token is available.
     checkLogin();
 }
@@ -117,7 +115,7 @@ function loadLeaderboard() {
                 // Adds the contents to the div with id #leaderboard.
                 $('#leaderboardDisplay').html(leaderboardHTML);
 
-
+                setColours();
             }
         }
     });

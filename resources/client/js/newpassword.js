@@ -1,11 +1,6 @@
-function pageLoad() {
-    setColours();
-
-    resetNewPasswordForm()
-}
-
 // Runs an API request by the client when the form is submitted.
 function resetNewPasswordForm() {
+    setColours();
 
     // Setups up the form as a collective object.
     const newpasswordForm = $('#newpasswordForm');

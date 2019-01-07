@@ -1,4 +1,4 @@
-function pageLoad() {
+function homepageLoad() {
     setColours();
 
     let currentPage = window.location.href;
@@ -24,7 +24,7 @@ function setActive() {
                 dropdownItems[j].className = dropdownItems[j].className.replace(" active", "");
             }
 
-            // Sets the selected dropdown item to active.
+            // Sets the selected drop-down item to active.
             this.className += " active";
 
             // Gets the ID of the item selected.

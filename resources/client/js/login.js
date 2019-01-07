@@ -1,12 +1,3 @@
-function pageLoad() {
-    setColours();
-
-    // Resets the current session token.
-    Cookies.remove("sessionToken");
-
-    resetLoginForm();
-}
-
 // Sends the user to the create account webpage.
 function toNewUser() {
     window.location.href = "/client/html/newuser.html";
@@ -14,6 +5,7 @@ function toNewUser() {
 
 // Runs an API request by the client when the form is submitted.
 function resetLoginForm() {
+    setColours();
 
     // Checks if a there is a destination that the user wants to go to after logging in.
     if (Cookies.get("destination") === undefined) {
