@@ -1,4 +1,6 @@
 function pageLoad() {
+    setColours();
+
     // Resets the current session token.
     Cookies.remove("sessionToken");
 

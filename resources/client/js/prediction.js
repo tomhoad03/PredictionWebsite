@@ -1,4 +1,5 @@
 function pageLoad() {
+    setColours();
 
     // Checks if a session token is available.
     checkLogin();

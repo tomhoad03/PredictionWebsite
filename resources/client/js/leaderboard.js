@@ -1,4 +1,5 @@
 function pageLoad() {
+    setColours();
 
     // Checks if a session token is available.
     checkLogin();
@@ -73,7 +74,7 @@ function loadLeaderboard() {
             else {
                 // Creates the beginning of a table.
                 let leaderboardHTML = `<div class="container">`
-                                        + `<table class="table">`
+                                        + `<table class="table table-bordered shadow">`
                                             + `<thead class="thead-dark">`
                                                 + `<tr>`
                                                     + `<th scope="col">Position:</th>`

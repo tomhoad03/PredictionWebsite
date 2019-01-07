@@ -1,3 +1,9 @@
+function pageLoad() {
+    setColours();
+
+    resetNewPasswordForm()
+}
+
 // Runs an API request by the client when the form is submitted.
 function resetNewUserForm() {
 
