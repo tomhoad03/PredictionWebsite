@@ -97,7 +97,7 @@ function checkTime() {
     let weekday = date.getDay();
 
     // Checks if it's the weekend.
-    if (weekday === 1 || weekday === 6) {
+    if (weekday === 0 || weekday === 6) {
 
         // Gets all the dropdown menu items on the webpage.
         let dropdownItems = document.getElementsByClassName("dropdown-item" || "dropdown-item active");

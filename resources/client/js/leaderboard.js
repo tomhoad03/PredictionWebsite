@@ -74,7 +74,7 @@ function loadLeaderboard() {
                 // Creates the beginning of a table.
                 let leaderboardHTML = `<div class="container">`
                                         + `<table class="table table-striped">`
-                                            + `<thead>`
+                                            + `<thead class="thead-dark">`
                                                 + `<tr>`
                                                     + `<th scope="col">Position:</th>`
                                                     + `<th scope="col">Username:</th>`
@@ -87,8 +87,8 @@ function loadLeaderboard() {
                 for (let leaderboard of leaderboardList) {
                     leaderboardHTML += `<tr>`
                                         + `<th scope="row">${leaderboard.position}</th>`
-                                        + `<th scope="row">${leaderboard.username}</th>`
-                                        + `<th scope="row">${leaderboard.totalPoints}</th>`
+                                        + `<td>${leaderboard.username}</td>`
+                                        + `<td>${leaderboard.totalPoints}</td>`
                                         + `</tr>`;
                 }
 

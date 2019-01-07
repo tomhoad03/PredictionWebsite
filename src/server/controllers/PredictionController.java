@@ -122,6 +122,10 @@ public class PredictionController {
                     if (question1Answer == p.getChoiceID()) {
                         success = addScore(p.getUserID());
                     }
+                    else {
+                        success = "Incorrect";
+                    }
+
                     break;
 
                 case 2:
@@ -130,6 +134,10 @@ public class PredictionController {
                     if (question2Answer == p.getChoiceID()) {
                         success = addScore(p.getUserID());
                     }
+                    else {
+                        success = "Incorrect";
+                    }
+
                     break;
 
                 case 3:
@@ -138,6 +146,10 @@ public class PredictionController {
                     if (question3Answer == p.getChoiceID()) {
                         success = addScore(p.getUserID());
                     }
+                    else {
+                        success = "Incorrect";
+                    }
+
                     break;
 
                 case 4:
@@ -146,6 +158,10 @@ public class PredictionController {
                     if (question4Answer == p.getChoiceID()) {
                         success = addScore(p.getUserID());
                     }
+                    else {
+                        success = "Incorrect";
+                    }
+
                     break;
 
                 case 5:
@@ -154,6 +170,10 @@ public class PredictionController {
                     if (question5Answer == p.getChoiceID()) {
                         success = addScore(p.getUserID());
                     }
+                    else {
+                        success = "Incorrect";
+                    }
+
                     break;
 
                 default:
@@ -161,8 +181,12 @@ public class PredictionController {
             }
 
             // Deletes the prediction.
-            if (success.equals("OK")) {
+            if (success.equals("OK") || success.equals("Incorrect")) {
                 PredictionService.deleteById(p.getPredictionID());
+            }
+            else {
+                Logger.log("Error: Unable to score this prediction!");
+                return "Error: Unable to score this prediction!";
             }
 
         }
