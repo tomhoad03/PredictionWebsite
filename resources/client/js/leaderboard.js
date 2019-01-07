@@ -64,36 +64,43 @@ function loadLeaderboard() {
         url: '/leaderboard/display',
         type: 'GET',
 
-        success: leaderboard => {
+        success: leaderboardList => {
 
-            // Creates the beginning of a table.
-            let leaderboardHTML = `<div class="container">`
-                                    + `<table class="table table-striped">`
-                                        + `<thead>`
-                                            + `<tr>`
-                                                + `<th scope="col">Position:</th>`
-                                                + `<th scope="col">Username:</th>`
-                                                + `<th scope="col">TotalPoints:</th>`
-                                            + `</tr>`
-                                    + `</thead>`
-                                    + `<tbody>`;
-
-            // For every user on the leaderboard, their details are added in this format.
-            for (let user of leaderboard) {
-                leaderboardHTML += `<tr>`
-                                    + `<th scope="row">${leaderboard.position}</th>`
-                                    + `<th scope="row">${leaderboard.username}</th>`
-                                    + `<th scope="row">${leaderboard.totalPoints}</th>`
-                                + `</tr>`;
+            if (leaderboardList.hasOwnProperty('error')){
+                alert(leaderboardList.error);
             }
+            else {
+                // Creates the beginning of a table.
+                let leaderboardHTML = `<div class="container">`
+                                        + `<table class="table table-striped">`
+                                            + `<thead>`
+                                                + `<tr>`
+                                                    + `<th scope="col">Position:</th>`
+                                                    + `<th scope="col">Username:</th>`
+                                                    + `<th scope="col">TotalPoints:</th>`
+                                                + `</tr>`
+                                            + `</thead>`
+                                        + `<tbody>`;
 
-            // Adds the final remains of the table.
-            leaderboardHTML +=      `</tbody>`
-                                + `</table>`
-                            + `</div>`;
+                // For every user on the leaderboard, their details are added in this format.
+                for (let leaderboard of leaderboardList) {
+                    leaderboardHTML += `<tr>`
+                                        + `<th scope="row">${leaderboard.position}</th>`
+                                        + `<th scope="row">${leaderboard.username}</th>`
+                                        + `<th scope="row">${leaderboard.totalPoints}</th>`
+                                        + `</tr>`;
+                }
 
-            // Adds the contents to the div with id #leaderboard.
-            $('#leaderboard').html(leaderboardHTML);
+                // Adds the final remains of the table.
+                leaderboardHTML +=      `</tbody>`
+                                    + `</table>`
+                                + `</div>`;
+
+                // Adds the contents to the div with id #leaderboard.
+                $('#leaderboard').html(leaderboardHTML);
+
+                alert(leaderboardList);
+            }
         }
     });
 

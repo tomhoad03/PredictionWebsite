@@ -61,7 +61,7 @@ public class LeaderboardController {
             UserService.selectAllInto(User.users);
 
             // Creates an array to store a leaderboard in.
-            JSONArray leaderboard = new JSONArray();
+            JSONArray leaderboardList = new JSONArray();
 
             // Looks at every user in the leaderboard.
             for (Leaderboard l : Leaderboard.leaderboards) {
@@ -79,11 +79,14 @@ public class LeaderboardController {
                     }
                 }
 
-                leaderboard.add(jl);
+                jl.put("position", l.getPosition());
+                jl.put("totalPoints", l.getTotalPoints());
+
+                leaderboardList.add(jl);
             }
 
             // Converts the leaderboard back from the JSON form.
-            return leaderboard.toString();
+            return leaderboardList.toString();
         }
         else {
             JSONObject response = new JSONObject();
