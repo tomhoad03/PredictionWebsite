@@ -43,3 +43,12 @@ nav {
     margin-bottom: 8px;
 }
 
+#intro {
+    background-color: whitesmoke;
+
+    border: 2px solid #ff2800;
+    border-radius: 8px;
+
+    width: 400px;
+}
+
