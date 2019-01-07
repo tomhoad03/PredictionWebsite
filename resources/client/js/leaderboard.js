@@ -83,11 +83,11 @@ function loadLeaderboard() {
                                         + `<tbody>`;
 
                 // For every user on the leaderboard, their details are added in this format.
-                for (let leaderboard of leaderboardList) {
+                for (let Leaderboard of leaderboardList) {
                     leaderboardHTML += `<tr>`
-                                        + `<th scope="row">${leaderboard.position}</th>`
-                                        + `<th scope="row">${leaderboard.username}</th>`
-                                        + `<th scope="row">${leaderboard.totalPoints}</th>`
+                                        + `<th scope="row">${Leaderboard.position}</th>`
+                                        + `<th scope="row">${Leaderboard.username}</th>`
+                                        + `<th scope="row">${Leaderboard.totalPoints}</th>`
                                         + `</tr>`;
                 }
 
@@ -97,9 +97,7 @@ function loadLeaderboard() {
                                 + `</div>`;
 
                 // Adds the contents to the div with id #leaderboard.
-                $('#leaderboard').html(leaderboardHTML);
-
-                alert(leaderboardList);
+                $('#leaderboardDisplay').html(leaderboardHTML);
             }
         }
     });

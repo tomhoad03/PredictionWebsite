@@ -50,6 +50,7 @@ public class LeaderboardController {
     @Path("display")
     @Consumes(MediaType.APPLICATION_JSON)
 
+    // Creates the leaderboard as an object.
     public String display() {
 
         // Gets all of the records from the leaderboard.
@@ -78,9 +79,6 @@ public class LeaderboardController {
                         break;
                     }
                 }
-
-                jl.put("position", l.getPosition());
-                jl.put("totalPoints", l.getTotalPoints());
 
                 leaderboardList.add(jl);
             }
