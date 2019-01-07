@@ -66,6 +66,7 @@ function loadLeaderboard() {
 
         success: leaderboardList => {
 
+            // Checks if there is an error in the leaderboard.
             if (leaderboardList.hasOwnProperty('error')){
                 alert(leaderboardList.error);
             }
@@ -83,11 +84,11 @@ function loadLeaderboard() {
                                         + `<tbody>`;
 
                 // For every user on the leaderboard, their details are added in this format.
-                for (let Leaderboard of leaderboardList) {
+                for (let leaderboard of leaderboardList) {
                     leaderboardHTML += `<tr>`
-                                        + `<th scope="row">${Leaderboard.position}</th>`
-                                        + `<th scope="row">${Leaderboard.username}</th>`
-                                        + `<th scope="row">${Leaderboard.totalPoints}</th>`
+                                        + `<th scope="row">${leaderboard.position}</th>`
+                                        + `<th scope="row">${leaderboard.username}</th>`
+                                        + `<th scope="row">${leaderboard.totalPoints}</th>`
                                         + `</tr>`;
                 }
 

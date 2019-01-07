@@ -48,7 +48,7 @@ public class LeaderboardController {
     // Defines the API request at /leaderboard/display.
     @GET
     @Path("display")
-    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
 
     // Creates the leaderboard as an object.
     public String display() {
