@@ -1,10 +1,9 @@
 function homepageLoad() {
-    setColours();
-
     let currentPage = window.location.href;
     Cookies.set("destination", currentPage);
 
     setActive();
+    setColours();
 }
 
 // Sets a drop-down items state to active if it is selected.
@@ -29,7 +28,7 @@ function setActive() {
 
             // Gets the ID of the item selected.
             let teamColour = this.id;
-            let colour = null;
+            let colour = "#FF2800";
 
             // Assigns the hex value for each team to the variable called colour.
             switch (teamColour) {
@@ -67,6 +66,8 @@ function setActive() {
 
             Cookies.set("colour", colour);
 
+            alert(colour);
+
             setColours();
         });
     }
@@ -80,7 +81,6 @@ function setColours() {
     $('h1').css('color', colour);
     $('nav').css('background-color', colour);
     $('.btn').css('background-color', colour);
-    $('#currentUser').css('color', colour);
     $('.form-group').css('border', '2px solid ' + colour);
     $('#intro').css('border', '2px solid ' + colour);
 }
