@@ -7,7 +7,7 @@ function homepageLoad() {
 }
 
 // Sets a drop-down items state to active if it is selected.
-function setHomeActive() {
+function setActive() {
 
     // Gets a list of all the drop-down items on the webpage.
     let dropdownItems = document.getElementsByClassName("dropdown-item");
@@ -28,7 +28,7 @@ function setHomeActive() {
 
             // Gets the ID of the item selected.
             let teamColour = this.id;
-            let colour = "#FF2800";
+            let colour = null;
 
             // Assigns the hex value for each team to the variable called colour.
             switch (teamColour) {
@@ -72,10 +72,14 @@ function setHomeActive() {
 }
 
 function setColours() {
+    // Gets the colour from the cookie storing it.
     let colour = Cookies.get("colour");
 
-    // Changes the default colours in the CSS file using jQuery.
+    if (colour === undefined) {
+        colour = "#FF2800";
+    }
 
+    // Changes the default colours in the CSS file using jQuery.
     $('h1').css('color', colour);
     $('nav').css('background-color', colour);
     $('.btn').css('background-color', colour);
