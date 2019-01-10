@@ -1,8 +1,9 @@
 function homepageLoad() {
-    let currentPage = window.location.href;
-    Cookies.set("destination", currentPage);
 
+    // Adds event listeners to all the webpage's drop-down items.
     setActive();
+
+    // Changes the colours of all the elements.
     setColours();
 }
 
@@ -60,7 +61,7 @@ function setActive() {
                     colour = "#0032FF";
                     break;
                 case "colour10":
-                    colour = "#061D41";
+                    colour = "#87CEEB";
                     break;
             }
 
@@ -81,8 +82,10 @@ function setColours() {
 
     // Changes the default colours in the CSS file using jQuery.
     $('h1').css('color', colour);
+
     $('nav').css('background-color', colour);
     $('.btn').css('background-color', colour);
+
     $('.form-group').css('border', '2px solid ' + colour);
     $('#intro').css('border', '2px solid ' + colour);
 }

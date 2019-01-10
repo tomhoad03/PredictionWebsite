@@ -10,10 +10,12 @@ nav {
     margin-bottom: 40px;
 }
 
+/* Styles any text that acts as a link */
 .linktext {
     font-style: italic;
 }
 
+/* Styles all buttons. */
 .btn {
     background-color: white;
     color: white;
@@ -35,10 +37,12 @@ nav {
     margin-right: auto;
 }
 
+/* Styles a specific form to improve layout. */
 .form-control {
     margin-bottom: 8px;
 }
 
+/* Styles the introductory paragraph. */
 #intro {
     background-color: whitesmoke;
 
