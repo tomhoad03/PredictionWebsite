@@ -42,7 +42,7 @@ function setActive() {
                     colour = "#00327D";
                     break;
                 case "colour4":
-                    colour = "#FFF500";
+                    colour = "#D2DD24";
                     break;
                 case "colour5":
                     colour = "#F596C8";
