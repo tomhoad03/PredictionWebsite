@@ -2,12 +2,12 @@ function homepageLoad() {
     let currentPage = window.location.href;
     Cookies.set("destination", currentPage);
 
-    setActive();
+    setHomeActive();
     setColours();
 }
 
 // Sets a drop-down items state to active if it is selected.
-function setActive() {
+function setHomeActive() {
 
     // Gets a list of all the drop-down items on the webpage.
     let dropdownItems = document.getElementsByClassName("dropdown-item");
@@ -65,8 +65,6 @@ function setActive() {
             }
 
             Cookies.set("colour", colour);
-
-            alert(colour);
 
             setColours();
         });
