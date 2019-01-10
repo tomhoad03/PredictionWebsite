@@ -1,6 +1,10 @@
 // Runs an API request by the client when the form is submitted.
 function resetNewUserForm() {
-    setColours();
+
+    // Calls the function to set the colour.
+    $.getScript("/client/js/homepage.js", function () {
+        setColours();
+    });
 
     // Setups up the form as a collective object.
     const newuserForm = $('#newuserForm');

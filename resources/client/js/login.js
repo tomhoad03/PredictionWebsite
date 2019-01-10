@@ -5,7 +5,11 @@ function toNewUser() {
 
 // Runs an API request by the client when the form is submitted.
 function resetLoginForm() {
-    setColours();
+
+    // Calls the function to set the colour.
+    $.getScript("/client/js/homepage.js", function () {
+        setColours();
+    });
 
     // Checks if a there is a destination that the user wants to go to after logging in.
     if (Cookies.get("destination") === undefined) {

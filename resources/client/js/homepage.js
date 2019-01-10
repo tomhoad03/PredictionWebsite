@@ -2,7 +2,7 @@ function homepageLoad() {
     let currentPage = window.location.href;
     Cookies.set("destination", currentPage);
 
-    setHomeActive();
+    setActive();
     setColours();
 }
 

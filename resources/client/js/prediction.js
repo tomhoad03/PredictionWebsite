@@ -1,5 +1,9 @@
 function pageLoad() {
-    setColours();
+
+    // Calls the function to set the colour.
+    $.getScript("/client/js/homepage.js", function () {
+        setColours();
+    });
 
     // Checks if a session token is available.
     checkLogin();

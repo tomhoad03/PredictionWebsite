@@ -115,7 +115,10 @@ function loadLeaderboard() {
                 // Adds the contents to the div with id #leaderboard.
                 $('#leaderboardDisplay').html(leaderboardHTML);
 
-                setColours();
+                // Calls the function to set the colour.
+                $.getScript("/client/js/homepage.js", function () {
+                    setColours();
+                });
             }
         }
     });
