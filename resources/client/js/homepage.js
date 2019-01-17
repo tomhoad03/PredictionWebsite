@@ -76,6 +76,7 @@ function setColours() {
     // Gets the colour from the cookie storing it.
     let colour = Cookies.get("colour");
 
+    // Sets the default colour to Ferrari red.
     if (colour === undefined || colour === null) {
         colour = "#FF2800";
 

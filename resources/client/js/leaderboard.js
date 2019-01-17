@@ -73,7 +73,7 @@ function loadLeaderboard() {
                 // Creates the beginning of a table.
                 let leaderboardHTML = `<div class="container">`
                                         + `<table class="table table-bordered shadow">`
-                                            + `<thead class="thead-dark">`
+                                            + `<thead id="boardHead" class="thead">`
                                                 + `<tr>`
                                                     + `<th scope="col">Position:</th>`
                                                     + `<th scope="col">Username:</th>`
