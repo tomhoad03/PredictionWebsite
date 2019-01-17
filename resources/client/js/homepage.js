@@ -65,8 +65,10 @@ function setActive() {
                     break;
             }
 
+            // Stores the colour in a cookie.
             Cookies.set("colour", colour);
 
+            // Updates the colours on the webpage.
             setColours();
         });
     }
