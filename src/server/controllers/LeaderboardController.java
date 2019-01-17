@@ -32,6 +32,7 @@ public class LeaderboardController {
         int position = 1;
 
         for (Leaderboard l: Leaderboard.leaderboards) {
+
             // Sets the position of this users.
             l.setPosition(position);
 
@@ -56,6 +57,7 @@ public class LeaderboardController {
         // Gets all of the records from the leaderboard.
         String status = LeaderboardService.selectAllInto(Leaderboard.leaderboards);
 
+        // Runs if the leaderboard is valid.
         if (status.equals("OK")) {
 
             // Gets all of the users.
@@ -87,6 +89,8 @@ public class LeaderboardController {
             return leaderboardList.toString();
         }
         else {
+
+            // Responds with an error if a leaderboard cannot be displayed.
             JSONObject response = new JSONObject();
             response.put("error", status);
             return response.toString();

@@ -11,11 +11,6 @@ function resetLoginForm() {
         setColours();
     });
 
-    // Checks if a there is a destination that the user wants to go to after logging in.
-    if (Cookies.get("destination") === undefined) {
-        window.location.href = "/client/html/login.html";
-    }
-
     // Sets up the login form API request.
     const loginForm = $('#loginForm');
     loginForm.submit(event => {

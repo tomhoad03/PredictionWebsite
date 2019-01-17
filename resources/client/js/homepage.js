@@ -76,9 +76,13 @@ function setColours() {
     // Gets the colour from the cookie storing it.
     let colour = Cookies.get("colour");
 
-    if (colour === undefined) {
+    if (colour === undefined || colour === null) {
         colour = "#FF2800";
+
+        Cookies.set("colour", colour);
     }
+
+    alert(colour);
 
     // Changes the default colours in the CSS file using jQuery.
     $('h1').css('color', colour);

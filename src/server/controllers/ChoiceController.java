@@ -1,6 +1,5 @@
 package server.controllers;
 
-import server.Logger;
 import server.models.Choice;
 import server.models.services.ChoiceService;
 
