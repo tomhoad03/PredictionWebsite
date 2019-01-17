@@ -82,8 +82,6 @@ function setColours() {
         Cookies.set("colour", colour);
     }
 
-    alert(colour);
-
     // Changes the default colours in the CSS file using jQuery.
     $('h1').css('color', colour);
 
