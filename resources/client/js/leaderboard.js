@@ -3,6 +3,7 @@ function pageLoad() {
     checkLogin();
 }
 
+// Calculates the positions of the users.
 function calculatePosition() {
     $.ajax({
         url: '/leaderboard/position',
