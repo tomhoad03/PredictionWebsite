@@ -134,6 +134,7 @@ public class UserController {
         // Checks if the credentials contain a space, which makes them invalid. This also covers lazy SQL injections.    
         } else if (newUsername.contains(" ") || newEmail.contains(" ") || newPassword.contains(" ") || confirmPassword.contains(" ")) {
             return "Error: The credentials have been entered in the incorrect format.;
+        }
                 
         // Checks if an email contains the @ symbol.
         } else if (!newEmail.contains("@")) {
