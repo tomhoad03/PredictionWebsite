@@ -127,9 +127,17 @@ public class UserController {
         if (newUsername.equals("") || newEmail.equals("") || newPassword.equals("") || confirmPassword.equals("")) {
             return "Error: Missing credentials.";
 
-            // Checks if the password and confirm password match up.
+        // Checks if the password and confirm password match up.
         } else if (!newPassword.toLowerCase().equals(confirmPassword.toLowerCase())) {
             return "Error: The passwords don't match.";
+            
+        // Checks if the credentials contain a space, which makes them invalid. This also covers lazy SQL injections.    
+        } else if (newUsername.contains(" ") || newEmail.contains(" ") || newPassword.contains(" ") || confirmPassword.contains(" ")) {
+            return "Error: The credentials have been entered in the incorrect format.;
+                
+        // Checks if an email contains the @ symbol.
+        } else if (!newEmail.contains("@")) {
+            return "Error: An invalid email address has been entered.";
         }
 
         // Inputs all the values from the database table.
