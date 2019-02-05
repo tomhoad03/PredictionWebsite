@@ -1,11 +1,23 @@
 function homepageLoad() {
 
+    // Removes all session tokens.
+    // destroySessions();
+
     // Adds event listeners to all the webpage's drop-down items.
     setActive();
 
     // Changes the colours of all the elements.
     setColours();
 }
+
+// Deletes all session tokens in the database.
+function destroySessions() {
+    $.ajax({
+        url: '/users/delete',
+        type: 'POST',
+    });
+}
+
 
 // Sets a drop-down items state to active if it is selected.
 function setActive() {

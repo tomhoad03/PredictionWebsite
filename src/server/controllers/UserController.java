@@ -1,5 +1,6 @@
 package server.controllers;
 
+import javax.annotation.PostConstruct;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Cookie;
 import javax.ws.rs.core.MediaType;
@@ -230,6 +231,27 @@ public class UserController {
         }
 
         return "Error: A user with this username or email does not exist.";
+    }
+
+    // Defines the API request at /users/delete.
+    @POST
+    @Path("delete")
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    @Produces(MediaType.TEXT_PLAIN)
+
+    // Deletes the session tokens of all the users in the database.
+    public String delete() {
+
+        for (int i = 1; i < User.nextId() - 1; i++) {
+
+            // Selects a user from the database.
+            User u = UserService.selectById(i);
+
+            // Removes their session token.
+            u.setSessionToken(null);
+
+            UserService.update(u);
+        }
     }
 
 }
