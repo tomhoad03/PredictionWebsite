@@ -4,9 +4,9 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.Cookie;
 import javax.ws.rs.core.MediaType;
 
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import javax.xml.bind.DatatypeConverter;
 
 import server.Logger;
 
@@ -171,8 +171,17 @@ public class UserController {
     private String generateHash(String saltedPassword) {
         try {
             MessageDigest hasher = MessageDigest.getInstance("SHA-256");
-            hasher.update(saltedPassword.getBytes());
-            return DatatypeConverter.printHexBinary(hasher.digest()).toUpperCase();
+            byte[] encodedHash = hasher.digest(saltedPassword.getBytes(StandardCharsets.UTF_8));
+
+            StringBuilder hexString = new StringBuilder();
+
+            for (byte hash : encodedHash) {
+                String hex = Integer.toHexString(0xff & hash);
+                if (hex.length() == 1) hexString.append('0');
+                hexString.append(hex);
+            }
+            return hexString.toString();
+
         } catch (NoSuchAlgorithmException nsae) {
             return nsae.getMessage();
         }
